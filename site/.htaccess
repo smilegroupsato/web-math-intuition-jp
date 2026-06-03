@@ -1,0 +1,3 @@
+AddOutputFilterByType SUBSTITUTE text/html
+Substitute "s|卓さんの言い方は|この言い方は|n"
+Substitute "s|卓さんの整理|この整理|n"
