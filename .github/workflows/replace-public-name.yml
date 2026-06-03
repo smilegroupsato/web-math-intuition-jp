@@ -1,0 +1,43 @@
+name: Replace public personal name
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/replace-public-name.yml'
+      - 'site/information-and-relation.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Replace personal name in HTML source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('site/information-and-relation.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('卓さんの言い方は', 'この言い方は')
+          text = text.replace('卓さんの整理', 'この整理')
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit replacement if needed
+        run: |
+          if git diff --quiet -- site/information-and-relation.html; then
+            echo "No replacement needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/information-and-relation.html
+          git commit -m "Remove personal name from information note"
+          git push
