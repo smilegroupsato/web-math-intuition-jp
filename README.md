@@ -27,6 +27,7 @@
     linear-basis-coordinate.html
     information-and-relation.html
     relation-form-beyond-worldness.html
+    image-and-preimage-emotion.html
   .github/
     workflows/
       deploy.yml
