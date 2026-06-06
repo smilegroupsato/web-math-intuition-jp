@@ -1,90 +1,193 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>方程式と図形はどう対応するか</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260606-notebox">
-  <style>
-    .note-box{margin:32px 0;padding:20px 22px;border:1px solid rgba(185,150,93,.38);border-left:6px solid #b9965d;border-radius:14px;background:rgba(255,250,241,.82);box-shadow:0 10px 24px rgba(24,32,47,.06)}
-    .note-box h3{margin-top:0;font-size:22px;color:#7b5a2f}
-    .note-box p,.note-box ul,.note-box blockquote{font-size:15px}
-    .note-box blockquote{background:rgba(255,255,255,.62)}
-  </style>
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(','\\)'], ['$', '$']],
-        displayMath: [['$$','$$']]
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>方程式と図形はどう対応するか</title>
+    <link rel="stylesheet" href="assets/style.css?v=20260606-note-style4" />
+    <style>
+      .note-box {
+        margin: 32px 0;
+        padding: 20px 22px;
+        border: 1px solid rgba(185, 150, 93, 0.38);
+        border-left: 6px solid #b9965d;
+        border-radius: 14px;
+        background: rgba(255, 250, 241, 0.82);
+        box-shadow: 0 10px 24px rgba(24, 32, 47, 0.06);
       }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
-      <nav class="nav">
-        <a href="index.html">トップ</a>
-        <a href="linear-algebra-01.html">線形代数</a>
-        <a href="linear-matrix-transform.html">次へ</a>
-      </nav>
-    </div>
-  </header>
+      .note-box h3 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #7b5a2f;
+      }
+      .note-box p,
+      .note-box ul,
+      .note-box blockquote {
+        font-size: 15px;
+      }
+      .note-box blockquote {
+        background: rgba(255, 255, 255, 0.62);
+      }
+    </style>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["\\(", "\\)"],
+            ["$", "$"],
+          ],
+          displayMath: [["$$", "$$"]],
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
 
-  <section class="page-hero">
-    <div class="inner">
-      <div class="eyebrow">Phase 1 / Linear Algebra</div>
-      <h1>方程式と図形はどう対応するか</h1>
-      <p class="lead">方程式を、計算式ではなく、空間に刻まれた条件として読む。</p>
-    </div>
-  </section>
+    <style id="note-box-inline-style">
+      aside.note-box {
+        display: block !important;
+        margin: 32px 0 !important;
+        padding: 20px 22px !important;
+        border: 1px solid rgba(185, 150, 93, 0.38) !important;
+        border-left: 6px solid #b9965d !important;
+        border-radius: 14px !important;
+        background: rgba(255, 250, 241, 0.82) !important;
+        box-shadow: 0 10px 24px rgba(24, 32, 47, 0.06) !important;
+      }
+      aside.note-box h3 {
+        margin-top: 0 !important;
+        font-size: 22px !important;
+        color: #7b5a2f !important;
+      }
+      aside.note-box p,
+      aside.note-box ul,
+      aside.note-box blockquote {
+        font-size: 15px !important;
+      }
+      aside.note-box blockquote {
+        background: rgba(255, 255, 255, 0.62) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          >失われた数学的直観の回復<small
+            >Recovering Mathematical Intuition</small
+          ></a
+        >
+        <nav class="nav">
+          <a href="index.html">トップ</a>
+          <a href="linear-algebra-01.html">線形代数</a>
+          <a href="linear-matrix-transform.html">次へ</a>
+        </nav>
+      </div>
+    </header>
 
-  <main class="article-wrap note-content">
-    <h2>0. このノートの位置づけ</h2>
-    <p>このページでは、方程式を「答えを出すための式」ではなく、空間の中から条件を満たす点を選び出す装置として扱う。</p>
+    <section class="page-hero">
+      <div class="inner">
+        <div class="eyebrow">Phase 1 / Linear Algebra</div>
+        <h1>方程式と図形はどう対応するか</h1>
+        <p class="lead">
+          方程式を、計算式ではなく、空間に刻まれた条件として読む。
+        </p>
+      </div>
+    </section>
 
-    <h2>1. 方程式は条件である</h2>
-    <p>たとえば、</p>
-    <div class="math-block">$$2x+y=3$$</div>
-    <p>これは単なる計算式ではなく、「この条件を満たす点だけが並ぶ場所」を表している。</p>
-    <p>2次元平面では、それは直線になる。つまり方程式とは、空間の中から、ある条件を満たす点たちを選び出す装置である。</p>
-    <blockquote>式は記号ではなく、空間の切り取り方である。</blockquote>
+    <main class="article-wrap note-content">
+      <h2>0. このノートの位置づけ</h2>
+      <p>
+        このページでは、方程式を「答えを出すための式」ではなく、空間の中から条件を満たす点を選び出す装置として扱う。
+      </p>
 
-    <h2>2. 座標値と関係</h2>
-    <p>点の座標だけを見れば、それは情報である。しかし、点と点の距離、向き、角度、同じ条件を満たすかどうかは関係である。</p>
-    <p>線形代数では、この「関係がどう保たれ、どう変形されるか」を見ていく。</p>
+      <h2>1. 方程式は条件である</h2>
+      <p>たとえば、</p>
+      <div class="math-block">$$2x+y=3$$</div>
+      <p>
+        これは単なる計算式ではなく、「この条件を満たす点だけが並ぶ場所」を表している。
+      </p>
+      <p>
+        2次元平面では、それは直線になる。つまり方程式とは、空間の中から、ある条件を満たす点たちを選び出す装置である。
+      </p>
+      <blockquote>式は記号ではなく、空間の切り取り方である。</blockquote>
 
-    <aside class="note-box">
-      <h3>注記｜線形代数が扱う「関係」</h3>
-      <p>ここでいう「関係」は、何でもありの広い意味での関係ではない。線形代数がまず扱うのは、線形構造に関する関係である。</p>
-      <p>具体的には、次のような関係を扱う。</p>
-      <ul>
-        <li><strong>和</strong>：二つのベクトルを足したとき、どこへ行くか。</li>
-        <li><strong>スカラー倍</strong>：一つのベクトルを何倍かしたとき、向きや長さがどう変わるか。</li>
-        <li><strong>線形結合</strong>：複数のベクトルを、倍率をつけて足し合わせることで、どのベクトルを作れるか。</li>
-        <li><strong>部分空間</strong>：足し算とスカラー倍に対して閉じている、空間の中の安定した部分。</li>
-        <li><strong>一次独立性</strong>：あるベクトルたちが、互いに他のベクトルの組み合わせとして作れないかどうか。</li>
-        <li><strong>次元</strong>：その空間を表すために、本質的に何本の独立した方向が必要か。</li>
-        <li><strong>核</strong>：線形写像によってゼロへ潰されるベクトルたちの集まり。</li>
-        <li><strong>像</strong>：線形写像によって実際に到達できる先の範囲。</li>
-        <li><strong>階数</strong>：線形写像の像が何次元分の広がりを持っているか。</li>
-        <li><strong>基底変換</strong>：対象そのものではなく、表し方・測り方・座標の取り方がどう変わるか。</li>
-        <li><strong>内積が入った場合の距離・角度</strong>：二つのベクトルがどれくらい離れているか、どのくらい同じ向きを向いているか。</li>
-      </ul>
-      <p>つまり、線形代数は関係一般を扱うというより、線形結合・部分空間・次元・写像によって保たれる構造を扱う。</p>
-      <p>ここを区別しておくと、「関係」という言葉が、数学的な構造を指しているのか、情緒研究や生成AI論へ拡張された比喩的な関係を指しているのかを混同しにくくなる。</p>
-    </aside>
+      <h2>2. 座標値と関係</h2>
+      <p>
+        点の座標だけを見れば、それは情報である。しかし、点と点の距離、向き、角度、同じ条件を満たすかどうかは関係である。
+      </p>
+      <p>
+        線形代数では、この「関係がどう保たれ、どう変形されるか」を見ていく。
+      </p>
 
-    <div class="page-nav">
-      <a href="linear-vector.html">前へ：ベクトルとは何か</a>
-      <a href="linear-matrix-transform.html">次へ：行列と空間変形</a>
-    </div>
-  </main>
+      <aside class="note-box">
+        <h3>注記｜線形代数が扱う「関係」</h3>
+        <p>
+          ここでいう「関係」は、何でもありの広い意味での関係ではない。線形代数がまず扱うのは、線形構造に関する関係である。
+        </p>
+        <p>具体的には、次のような関係を扱う。</p>
+        <ul>
+          <li>
+            <strong>和</strong>：二つのベクトルを足したとき、どこへ行くか。
+          </li>
+          <li>
+            <strong>スカラー倍</strong
+            >：一つのベクトルを何倍かしたとき、向きや長さがどう変わるか。
+          </li>
+          <li>
+            <strong>線形結合</strong
+            >：複数のベクトルを、倍率をつけて足し合わせることで、どのベクトルを作れるか。
+          </li>
+          <li>
+            <strong>部分空間</strong
+            >：足し算とスカラー倍に対して閉じている、空間の中の安定した部分。
+          </li>
+          <li>
+            <strong>一次独立性</strong
+            >：あるベクトルたちが、互いに他のベクトルの組み合わせとして作れないかどうか。
+          </li>
+          <li>
+            <strong>次元</strong
+            >：その空間を表すために、本質的に何本の独立した方向が必要か。
+          </li>
+          <li>
+            <strong>核</strong
+            >：線形写像によってゼロへ潰されるベクトルたちの集まり。
+          </li>
+          <li>
+            <strong>像</strong>：線形写像によって実際に到達できる先の範囲。
+          </li>
+          <li>
+            <strong>階数</strong
+            >：線形写像の像が何次元分の広がりを持っているか。
+          </li>
+          <li>
+            <strong>基底変換</strong
+            >：対象そのものではなく、表し方・測り方・座標の取り方がどう変わるか。
+          </li>
+          <li>
+            <strong>内積が入った場合の距離・角度</strong
+            >：二つのベクトルがどれくらい離れているか、どのくらい同じ向きを向いているか。
+          </li>
+        </ul>
+        <p>
+          つまり、線形代数は関係一般を扱うというより、線形結合・部分空間・次元・写像によって保たれる構造を扱う。
+        </p>
+        <p>
+          ここを区別しておくと、「関係」という言葉が、数学的な構造を指しているのか、情緒研究や生成AI論へ拡張された比喩的な関係を指しているのかを混同しにくくなる。
+        </p>
+      </aside>
 
-  <footer class="footer">
-    <div class="inner">失われた数学的直観の回復</div>
-  </footer>
-</body>
+      <div class="page-nav">
+        <a href="linear-vector.html">前へ：ベクトルとは何か</a>
+        <a href="linear-matrix-transform.html">次へ：行列と空間変形</a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="inner">失われた数学的直観の回復</div>
+    </footer>
+  </body>
 </html>

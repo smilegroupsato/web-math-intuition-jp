@@ -1,92 +1,171 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ベクトルとは何か</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(','\\)'], ['$', '$']],
-        displayMath: [['$$','$$']]
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ベクトルとは何か</title>
+    <link rel="stylesheet" href="assets/style.css?v=20260606-note-style4" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["\\(", "\\)"],
+            ["$", "$"],
+          ],
+          displayMath: [["$$", "$$"]],
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
+
+    <style id="note-box-inline-style">
+      aside.note-box {
+        display: block !important;
+        margin: 32px 0 !important;
+        padding: 20px 22px !important;
+        border: 1px solid rgba(185, 150, 93, 0.38) !important;
+        border-left: 6px solid #b9965d !important;
+        border-radius: 14px !important;
+        background: rgba(255, 250, 241, 0.82) !important;
+        box-shadow: 0 10px 24px rgba(24, 32, 47, 0.06) !important;
       }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
-      <nav class="nav">
-        <a href="index.html">トップ</a>
-        <a href="linear-algebra-01.html">線形代数</a>
-        <a href="linear-equation-geometry.html">次へ</a>
-      </nav>
-    </div>
-  </header>
+      aside.note-box h3 {
+        margin-top: 0 !important;
+        font-size: 22px !important;
+        color: #7b5a2f !important;
+      }
+      aside.note-box p,
+      aside.note-box ul,
+      aside.note-box blockquote {
+        font-size: 15px !important;
+      }
+      aside.note-box blockquote {
+        background: rgba(255, 255, 255, 0.62) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          >失われた数学的直観の回復<small
+            >Recovering Mathematical Intuition</small
+          ></a
+        >
+        <nav class="nav">
+          <a href="index.html">トップ</a>
+          <a href="linear-algebra-01.html">線形代数</a>
+          <a href="linear-equation-geometry.html">次へ</a>
+        </nav>
+      </div>
+    </header>
 
-  <section class="page-hero">
-    <div class="inner">
-      <div class="eyebrow">Phase 1 / Linear Algebra</div>
-      <h1>ベクトルとは何か</h1>
-      <p class="lead">ベクトルを「数字の並び」ではなく、空間内の差分・方向・関係として読む。</p>
-    </div>
-  </section>
+    <section class="page-hero">
+      <div class="inner">
+        <div class="eyebrow">Phase 1 / Linear Algebra</div>
+        <h1>ベクトルとは何か</h1>
+        <p class="lead">
+          ベクトルを「数字の並び」ではなく、空間内の差分・方向・関係として読む。
+        </p>
+      </div>
+    </section>
 
-  <main class="article-wrap note-content">
-    <h2>0. このノートの位置づけ</h2>
-    <p>このページは、線形代数への最初の入口として、ベクトルを点・位置・差分・関係の側から整理する。目的は、計算手順に入る前に、ベクトルが何を表しているのかを図形的に掴むことである。</p>
+    <main class="article-wrap note-content">
+      <h2>0. このノートの位置づけ</h2>
+      <p>
+        このページは、線形代数への最初の入口として、ベクトルを点・位置・差分・関係の側から整理する。目的は、計算手順に入る前に、ベクトルが何を表しているのかを図形的に掴むことである。
+      </p>
 
-    <h2>1. ベクトルは数字の並びではない</h2>
-    <p>たとえば、</p>
-    <div class="math-block">$$\begin{pmatrix}3\\2\end{pmatrix}$$</div>
-    <p>は、単に「3と2」ではない。ある空間の中で、右に3、上に2だけ進むという関係・移動・差分を表している。</p>
-    <blockquote>ベクトルは、点そのものというより、あるものから別のものへ向かう差であり、空間の中に置かれた向きと大きさであり、座標で表現された関係である。</blockquote>
+      <h2>1. ベクトルは数字の並びではない</h2>
+      <p>たとえば、</p>
+      <div class="math-block">$$\begin{pmatrix}3\\2\end{pmatrix}$$</div>
+      <p>
+        は、単に「3と2」ではない。ある空間の中で、右に3、上に2だけ進むという関係・移動・差分を表している。
+      </p>
+      <blockquote>
+        ベクトルは、点そのものというより、あるものから別のものへ向かう差であり、空間の中に置かれた向きと大きさであり、座標で表現された関係である。
+      </blockquote>
 
-    <h2>2. 点Aから点Bへの差分</h2>
-    <p>点Aが \(A=(1,4)\)、点Bが \(B=(4,6)\) なら、AからBへのベクトルは、</p>
-    <div class="math-block">$$B-A=(4-1,\ 6-4)=(3,2)$$</div>
-    <p>になる。つまり、AからBへ行くには、右に3、上に2だけ進めばよい。</p>
+      <h2>2. 点Aから点Bへの差分</h2>
+      <p>点Aが \(A=(1,4)\)、点Bが \(B=(4,6)\) なら、AからBへのベクトルは、</p>
+      <div class="math-block">$$B-A=(4-1,\ 6-4)=(3,2)$$</div>
+      <p>になる。つまり、AからBへ行くには、右に3、上に2だけ進めばよい。</p>
 
-    <h2>3. 位置ベクトルと変位ベクトル</h2>
-    <table>
-      <tr><td>見方</td><td>意味</td></tr>
-      <tr><td>原点から点への矢印</td><td>位置ベクトル</td></tr>
-      <tr><td>点Aから点Bへの差分</td><td>変位ベクトル</td></tr>
-    </table>
-    <p>本質的には、後者の「差分・関係」として見る方が強い。ただし、原点を決めると、点を原点からのベクトルとして表せる。</p>
+      <h2>3. 位置ベクトルと変位ベクトル</h2>
+      <table>
+        <tr>
+          <td>見方</td>
+          <td>意味</td>
+        </tr>
+        <tr>
+          <td>原点から点への矢印</td>
+          <td>位置ベクトル</td>
+        </tr>
+        <tr>
+          <td>点Aから点Bへの差分</td>
+          <td>変位ベクトル</td>
+        </tr>
+      </table>
+      <p>
+        本質的には、後者の「差分・関係」として見る方が強い。ただし、原点を決めると、点を原点からのベクトルとして表せる。
+      </p>
 
-    <aside class="note-box">
-      <h3>注記｜点・ベクトル・座標・アフィン空間</h3>
-      <p>ここでは直観を優先して、点とベクトルを近いものとして扱っている。ただし、厳密には次のように区別できる。</p>
-      <ul>
-        <li><strong>点</strong>：空間内の位置</li>
-        <li><strong>ベクトル</strong>：点から点への差分、または平行移動量</li>
-        <li><strong>座標</strong>：原点と基底を選んだあとで点やベクトルに与える数値表現</li>
-        <li><strong>アフィン空間</strong>：点はあるが、原点はまだ特権化されていない空間</li>
-        <li><strong>ベクトル空間</strong>：原点があり、足し算とスカラー倍が定義された空間</li>
-      </ul>
-      <p>点とベクトルは、原点を選ぶことで同一視できる場合がある。しかし、本来は同じものではない。</p>
-      <p>原点を選んだとき、点は「原点からその点へ向かう位置ベクトル」として表せる。反対に、原点を選ぶ前の点の集まりは、ベクトル空間というより、アフィン空間として見る方が自然である。</p>
-      <blockquote>アフィン空間とは、点はあるが、原点はまだ特権化されていない空間である。</blockquote>
-      <p>この区別は、座標変換や相対性理論へ進むときに重要になる。対象そのものが先にあり、その対象をどう測るか、どこを原点にするか、どの基底で表すかは、あとから選ばれる。</p>
-    </aside>
+      <aside class="note-box">
+        <h3>注記｜点・ベクトル・座標・アフィン空間</h3>
+        <p>
+          ここでは直観を優先して、点とベクトルを近いものとして扱っている。ただし、厳密には次のように区別できる。
+        </p>
+        <ul>
+          <li><strong>点</strong>：空間内の位置</li>
+          <li><strong>ベクトル</strong>：点から点への差分、または平行移動量</li>
+          <li>
+            <strong>座標</strong
+            >：原点と基底を選んだあとで点やベクトルに与える数値表現
+          </li>
+          <li>
+            <strong>アフィン空間</strong
+            >：点はあるが、原点はまだ特権化されていない空間
+          </li>
+          <li>
+            <strong>ベクトル空間</strong
+            >：原点があり、足し算とスカラー倍が定義された空間
+          </li>
+        </ul>
+        <p>
+          点とベクトルは、原点を選ぶことで同一視できる場合がある。しかし、本来は同じものではない。
+        </p>
+        <p>
+          原点を選んだとき、点は「原点からその点へ向かう位置ベクトル」として表せる。反対に、原点を選ぶ前の点の集まりは、ベクトル空間というより、アフィン空間として見る方が自然である。
+        </p>
+        <blockquote>
+          アフィン空間とは、点はあるが、原点はまだ特権化されていない空間である。
+        </blockquote>
+        <p>
+          この区別は、座標変換や相対性理論へ進むときに重要になる。対象そのものが先にあり、その対象をどう測るか、どこを原点にするか、どの基底で表すかは、あとから選ばれる。
+        </p>
+      </aside>
 
-    <h2>4. 三次元、四次元、高次元のベクトル</h2>
-    <p>三次元なら成分は3個、四次元なら成分は4個になる。</p>
-    <div class="math-block">$$\begin{pmatrix}x_1\\x_2\\x_3\\\vdots\\x_n\end{pmatrix}$$</div>
-    <p>成分が n 個あるものを n 次元ベクトルと呼ぶ。人間には図示できない高次元でも、数学的には「空間内の点・方向・関係」として扱える。</p>
+      <h2>4. 三次元、四次元、高次元のベクトル</h2>
+      <p>三次元なら成分は3個、四次元なら成分は4個になる。</p>
+      <div class="math-block">
+        $$\begin{pmatrix}x_1\\x_2\\x_3\\\vdots\\x_n\end{pmatrix}$$
+      </div>
+      <p>
+        成分が n 個あるものを n
+        次元ベクトルと呼ぶ。人間には図示できない高次元でも、数学的には「空間内の点・方向・関係」として扱える。
+      </p>
 
-    <div class="page-nav">
-      <a href="linear-algebra-01.html">章目次へ</a>
-      <a href="linear-equation-geometry.html">次へ：方程式と図形</a>
-    </div>
-  </main>
+      <div class="page-nav">
+        <a href="linear-algebra-01.html">章目次へ</a>
+        <a href="linear-equation-geometry.html">次へ：方程式と図形</a>
+      </div>
+    </main>
 
-  <footer class="footer">
-    <div class="inner">失われた数学的直観の回復</div>
-  </footer>
-</body>
+    <footer class="footer">
+      <div class="inner">失われた数学的直観の回復</div>
+    </footer>
+  </body>
 </html>

@@ -1,117 +1,250 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>座標・基底・原点</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260606-notebox">
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(','\\)'], ['$', '$']],
-        displayMath: [['$$','$$']]
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>座標・基底・原点</title>
+    <link rel="stylesheet" href="assets/style.css?v=20260606-note-style4" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["\\(", "\\)"],
+            ["$", "$"],
+          ],
+          displayMath: [["$$", "$$"]],
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
+
+    <style id="note-box-inline-style">
+      aside.note-box {
+        display: block !important;
+        margin: 32px 0 !important;
+        padding: 20px 22px !important;
+        border: 1px solid rgba(185, 150, 93, 0.38) !important;
+        border-left: 6px solid #b9965d !important;
+        border-radius: 14px !important;
+        background: rgba(255, 250, 241, 0.82) !important;
+        box-shadow: 0 10px 24px rgba(24, 32, 47, 0.06) !important;
       }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
-      <nav class="nav">
-        <a href="index.html">トップ</a>
-        <a href="linear-algebra-01.html">線形代数</a>
-        <a href="linear-vector.html">ベクトル</a>
-      </nav>
-    </div>
-  </header>
+      aside.note-box h3 {
+        margin-top: 0 !important;
+        font-size: 22px !important;
+        color: #7b5a2f !important;
+      }
+      aside.note-box p,
+      aside.note-box ul,
+      aside.note-box blockquote {
+        font-size: 15px !important;
+      }
+      aside.note-box blockquote {
+        background: rgba(255, 255, 255, 0.62) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html"
+          >失われた数学的直観の回復<small
+            >Recovering Mathematical Intuition</small
+          ></a
+        >
+        <nav class="nav">
+          <a href="index.html">トップ</a>
+          <a href="linear-algebra-01.html">線形代数</a>
+          <a href="linear-vector.html">ベクトル</a>
+        </nav>
+      </div>
+    </header>
 
-  <section class="page-hero">
-    <div class="inner">
-      <div class="eyebrow">Phase 1 / Linear Algebra</div>
-      <h1>座標・基底・原点</h1>
-      <p class="lead">同じ点・同じベクトルを、どのものさしで測るか。座標とは、基底に依存した表記である。</p>
-    </div>
-  </section>
+    <section class="page-hero">
+      <div class="inner">
+        <div class="eyebrow">Phase 1 / Linear Algebra</div>
+        <h1>座標・基底・原点</h1>
+        <p class="lead">
+          同じ点・同じベクトルを、どのものさしで測るか。座標とは、基底に依存した表記である。
+        </p>
+      </div>
+    </section>
 
-  <main class="article-wrap note-content">
-    <h2>0. このノートの位置づけ</h2>
-    <p>このページでは、点・位置・座標・ベクトル・基底・行列を分けて整理する。座標変換や相対性理論へ進む前に、「対象そのもの」と「測り方」を区別する。</p>
+    <main class="article-wrap note-content">
+      <h2>0. このノートの位置づけ</h2>
+      <p>
+        このページでは、点・位置・座標・ベクトル・基底・行列を分けて整理する。座標変換や相対性理論へ進む前に、「対象そのもの」と「測り方」を区別する。
+      </p>
 
-    <h2>1. 基底はものさしである</h2>
-    <p>標準基底は、次の2本の基本ベクトルである。</p>
-    <div class="math-block">$$\mathbf e_1=\begin{pmatrix}1\\0\end{pmatrix},\quad \mathbf e_2=\begin{pmatrix}0\\1\end{pmatrix}$$</div>
-    <p>ベクトル \(\begin{pmatrix}3\\2\end{pmatrix}\) は、右向き基本ベクトルを3個、上向き基本ベクトルを2個足したものとして読める。</p>
-    <div class="math-block">$$\begin{pmatrix}3\\2\end{pmatrix}=3\mathbf e_1+2\mathbf e_2$$</div>
+      <h2>1. 基底はものさしである</h2>
+      <p>標準基底は、次の2本の基本ベクトルである。</p>
+      <div class="math-block">
+        $$\mathbf e_1=\begin{pmatrix}1\\0\end{pmatrix},\quad \mathbf
+        e_2=\begin{pmatrix}0\\1\end{pmatrix}$$
+      </div>
+      <p>
+        ベクトル \(\begin{pmatrix}3\\2\end{pmatrix}\)
+        は、右向き基本ベクトルを3個、上向き基本ベクトルを2個足したものとして読める。
+      </p>
+      <div class="math-block">
+        $$\begin{pmatrix}3\\2\end{pmatrix}=3\mathbf e_1+2\mathbf e_2$$
+      </div>
 
-    <h2>2. 同じベクトルでも座標は変わる</h2>
-    <p>新しい基底を、</p>
-    <div class="math-block">$$\mathbf b_1=\begin{pmatrix}2\\0\end{pmatrix},\quad \mathbf b_2=\begin{pmatrix}0\\1\end{pmatrix}$$</div>
-    <p>と決める。この新しいものさしで見ると、標準座標で \(\begin{pmatrix}6\\2\end{pmatrix}\) だったベクトルは、B座標では \(\begin{pmatrix}3\\2\end{pmatrix}_B\) と書ける。</p>
-    <blockquote>座標とは「場所そのもの」ではなく、どの基底を何個ずつ使えばそのベクトルに届くかを表す数字である。</blockquote>
+      <h2>2. 同じベクトルでも座標は変わる</h2>
+      <p>新しい基底を、</p>
+      <div class="math-block">
+        $$\mathbf b_1=\begin{pmatrix}2\\0\end{pmatrix},\quad \mathbf
+        b_2=\begin{pmatrix}0\\1\end{pmatrix}$$
+      </div>
+      <p>
+        と決める。この新しいものさしで見ると、標準座標で
+        \(\begin{pmatrix}6\\2\end{pmatrix}\) だったベクトルは、B座標では
+        \(\begin{pmatrix}3\\2\end{pmatrix}_B\) と書ける。
+      </p>
+      <blockquote>
+        座標とは「場所そのもの」ではなく、どの基底を何個ずつ使えばそのベクトルに届くかを表す数字である。
+      </blockquote>
 
-    <h2>3. 斜めの基底</h2>
-    <p>基底は、必ずしも水平・垂直である必要はない。</p>
-    <div class="math-block">$$\mathbf b_1=\begin{pmatrix}1\\1\end{pmatrix},\quad \mathbf b_2=\begin{pmatrix}1\\-1\end{pmatrix}$$</div>
-    <p>このとき、B座標で \(\begin{pmatrix}2\\1\end{pmatrix}_B\) と表されるベクトルは、標準座標では次のようになる。</p>
-    <div class="math-block">$$\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}2\\1\end{pmatrix}=\begin{pmatrix}3\\1\end{pmatrix}$$</div>
-    <p>基底を列に並べた行列は、その基底での座標を標準座標へ翻訳する装置である。</p>
+      <h2>3. 斜めの基底</h2>
+      <p>基底は、必ずしも水平・垂直である必要はない。</p>
+      <div class="math-block">
+        $$\mathbf b_1=\begin{pmatrix}1\\1\end{pmatrix},\quad \mathbf
+        b_2=\begin{pmatrix}1\\-1\end{pmatrix}$$
+      </div>
+      <p>
+        このとき、B座標で \(\begin{pmatrix}2\\1\end{pmatrix}_B\)
+        と表されるベクトルは、標準座標では次のようになる。
+      </p>
+      <div class="math-block">
+        $$\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}2\\1\end{pmatrix}=\begin{pmatrix}3\\1\end{pmatrix}$$
+      </div>
+      <p>
+        基底を列に並べた行列は、その基底での座標を標準座標へ翻訳する装置である。
+      </p>
 
-    <aside class="note-box">
-      <h3>注記｜「空間全体を張る」とは何か</h3>
-      <p>基底を列に並べた行列が「基底設定の記録」として働くためには、その列ベクトルたちが一次独立であり、さらに空間全体を張っている必要がある。</p>
-      <p>「空間全体を張る」とは、そのベクトルたちを倍率つきで足し合わせることで、対象となる空間のどのベクトルにも届ける、という意味である。</p>
-      <p>たとえば2次元平面で、二本のベクトル \(\mathbf b_1,\mathbf b_2\) が平面全体を張るとは、任意のベクトル \(\mathbf v\) が、</p>
-      <div class="math-block">$$\mathbf v=c_1\mathbf b_1+c_2\mathbf b_2$$</div>
-      <p>という形で表せるということである。ここで \(c_1,c_2\) は実数であり、それぞれの基底ベクトルを何倍使うかを表す。</p>
-      <p>つまり、二本の基底ベクトルを「ものさし」や「移動方向」として使えば、平面のどの場所にも到達できる状態が、平面全体を張っている状態である。3次元空間なら、三本の独立したベクトルを組み合わせることで、空間内の任意のベクトルに届ける必要がある。</p>
-      <p>反対に、二本のベクトルが同じ直線上に並んでいる場合、それらを何倍して足し合わせても、その直線上のベクトルしか作れない。この場合、二本のベクトルは平面全体を張っていない。平面の中の一本の直線だけを張っている。</p>
-      <p>数学的には、ベクトルたち \(\mathbf b_1,\mathbf b_2,\ldots,\mathbf b_n\) が空間 \(V\) を張ることを、</p>
-      <div class="math-block">$$\operatorname{span}(\mathbf b_1,\mathbf b_2,\ldots,\mathbf b_n)=V$$</div>
-      <p>と書く。</p>
-      <p>したがって、行列の列が基底を表すためには、その列ベクトルたちが一次独立で、空間全体を張っていなければならない。そうでない場合、その行列は基底ではなく、次元を潰す変換や、低次元の部分空間だけを表すものになる。</p>
-    </aside>
+      <aside class="note-box">
+        <h3>注記｜「空間全体を張る」とは何か</h3>
+        <p>
+          基底を列に並べた行列が「基底設定の記録」として働くためには、その列ベクトルたちが一次独立であり、さらに空間全体を張っている必要がある。
+        </p>
+        <p>
+          「空間全体を張る」とは、そのベクトルたちを倍率つきで足し合わせることで、対象となる空間のどのベクトルにも届ける、という意味である。
+        </p>
+        <p>
+          たとえば2次元平面で、二本のベクトル \(\mathbf b_1,\mathbf b_2\)
+          が平面全体を張るとは、任意のベクトル \(\mathbf v\) が、
+        </p>
+        <div class="math-block">
+          $$\mathbf v=c_1\mathbf b_1+c_2\mathbf b_2$$
+        </div>
+        <p>
+          という形で表せるということである。ここで \(c_1,c_2\)
+          は実数であり、それぞれの基底ベクトルを何倍使うかを表す。
+        </p>
+        <p>
+          つまり、二本の基底ベクトルを「ものさし」や「移動方向」として使えば、平面のどの場所にも到達できる状態が、平面全体を張っている状態である。3次元空間なら、三本の独立したベクトルを組み合わせることで、空間内の任意のベクトルに届ける必要がある。
+        </p>
+        <p>
+          反対に、二本のベクトルが同じ直線上に並んでいる場合、それらを何倍して足し合わせても、その直線上のベクトルしか作れない。この場合、二本のベクトルは平面全体を張っていない。平面の中の一本の直線だけを張っている。
+        </p>
+        <p>
+          数学的には、ベクトルたち \(\mathbf b_1,\mathbf b_2,\ldots,\mathbf
+          b_n\) が空間 \(V\) を張ることを、
+        </p>
+        <div class="math-block">
+          $$\operatorname{span}(\mathbf b_1,\mathbf b_2,\ldots,\mathbf b_n)=V$$
+        </div>
+        <p>と書く。</p>
+        <p>
+          したがって、行列の列が基底を表すためには、その列ベクトルたちが一次独立で、空間全体を張っていなければならない。そうでない場合、その行列は基底ではなく、次元を潰す変換や、低次元の部分空間だけを表すものになる。
+        </p>
+      </aside>
 
-    <h2>4. 点・位置・座標・ベクトル</h2>
-    <table>
-      <tr><td>概念</td><td>整理</td></tr>
-      <tr><td>点</td><td>空間内の場所</td></tr>
-      <tr><td>ベクトル</td><td>点と点の差分・方向・関係</td></tr>
-      <tr><td>基底</td><td>観察単位・ものさし・評価軸</td></tr>
-      <tr><td>座標</td><td>原点と基底に依存したアドレス表記</td></tr>
-      <tr><td>行列</td><td>変換、または基底設定の記録</td></tr>
-    </table>
-    <p>点Pは、座標がまだ与えられていなくても、空間内の点としては決まっている。ただし、その点Pを数字で表すには、どこを原点にするか、どの基底で測るかが必要になる。</p>
+      <h2>4. 点・位置・座標・ベクトル</h2>
+      <table>
+        <tr>
+          <td>概念</td>
+          <td>整理</td>
+        </tr>
+        <tr>
+          <td>点</td>
+          <td>空間内の場所</td>
+        </tr>
+        <tr>
+          <td>ベクトル</td>
+          <td>点と点の差分・方向・関係</td>
+        </tr>
+        <tr>
+          <td>基底</td>
+          <td>観察単位・ものさし・評価軸</td>
+        </tr>
+        <tr>
+          <td>座標</td>
+          <td>原点と基底に依存したアドレス表記</td>
+        </tr>
+        <tr>
+          <td>行列</td>
+          <td>変換、または基底設定の記録</td>
+        </tr>
+      </table>
+      <p>
+        点Pは、座標がまだ与えられていなくても、空間内の点としては決まっている。ただし、その点Pを数字で表すには、どこを原点にするか、どの基底で測るかが必要になる。
+      </p>
 
-    <aside class="note-box">
-      <h3>注記｜点・ベクトル・座標・アフィン空間</h3>
-      <p>ここでは直観を優先して、点とベクトルを近いものとして扱っている。ただし、厳密には次のように区別できる。</p>
-      <ul>
-        <li><strong>点</strong>：空間内の位置</li>
-        <li><strong>ベクトル</strong>：点から点への差分、または平行移動量</li>
-        <li><strong>座標</strong>：原点と基底を選んだあとで点やベクトルに与える数値表現</li>
-        <li><strong>アフィン空間</strong>：点はあるが、原点はまだ特権化されていない空間</li>
-        <li><strong>ベクトル空間</strong>：原点があり、足し算とスカラー倍が定義された空間</li>
-      </ul>
-      <p>点とベクトルは、原点を選ぶことで同一視できる場合がある。しかし、本来は同じものではない。</p>
-      <p>原点を選んだとき、点は「原点からその点へ向かう位置ベクトル」として表せる。反対に、原点を選ぶ前の点の集まりは、ベクトル空間というより、アフィン空間として見る方が自然である。</p>
-      <blockquote>アフィン空間とは、点はあるが、原点はまだ特権化されていない空間である。</blockquote>
-      <p>この区別は、座標変換や相対性理論へ進むときに重要になる。対象そのものが先にあり、その対象をどう測るか、どこを原点にするか、どの基底で表すかは、あとから選ばれる。</p>
-    </aside>
+      <aside class="note-box">
+        <h3>注記｜点・ベクトル・座標・アフィン空間</h3>
+        <p>
+          ここでは直観を優先して、点とベクトルを近いものとして扱っている。ただし、厳密には次のように区別できる。
+        </p>
+        <ul>
+          <li><strong>点</strong>：空間内の位置</li>
+          <li><strong>ベクトル</strong>：点から点への差分、または平行移動量</li>
+          <li>
+            <strong>座標</strong
+            >：原点と基底を選んだあとで点やベクトルに与える数値表現
+          </li>
+          <li>
+            <strong>アフィン空間</strong
+            >：点はあるが、原点はまだ特権化されていない空間
+          </li>
+          <li>
+            <strong>ベクトル空間</strong
+            >：原点があり、足し算とスカラー倍が定義された空間
+          </li>
+        </ul>
+        <p>
+          点とベクトルは、原点を選ぶことで同一視できる場合がある。しかし、本来は同じものではない。
+        </p>
+        <p>
+          原点を選んだとき、点は「原点からその点へ向かう位置ベクトル」として表せる。反対に、原点を選ぶ前の点の集まりは、ベクトル空間というより、アフィン空間として見る方が自然である。
+        </p>
+        <blockquote>
+          アフィン空間とは、点はあるが、原点はまだ特権化されていない空間である。
+        </blockquote>
+        <p>
+          この区別は、座標変換や相対性理論へ進むときに重要になる。対象そのものが先にあり、その対象をどう測るか、どこを原点にするか、どの基底で表すかは、あとから選ばれる。
+        </p>
+      </aside>
 
-    <h2>5. 原点とは何か</h2>
-    <p>数学では、原点は「ここをゼロと決める」という基準点である。宇宙に絶対的な原点があるわけではない。物理では、原点はしばしば観測者のいる場所、観測者の時計がある場所、または測定の基準にする事象として置かれる。</p>
-    <p>座標変換とは、対象そのものを変えずに、測り方を変えることである。ここから次に、能動変換と受動変換へ進む。</p>
+      <h2>5. 原点とは何か</h2>
+      <p>
+        数学では、原点は「ここをゼロと決める」という基準点である。宇宙に絶対的な原点があるわけではない。物理では、原点はしばしば観測者のいる場所、観測者の時計がある場所、または測定の基準にする事象として置かれる。
+      </p>
+      <p>
+        座標変換とは、対象そのものを変えずに、測り方を変えることである。ここから次に、能動変換と受動変換へ進む。
+      </p>
 
-    <div class="page-nav">
-      <a href="linear-matrix-transform.html">前へ：行列と変換</a>
-      <a href="linear-algebra-01.html">章目次へ</a>
-    </div>
-  </main>
+      <div class="page-nav">
+        <a href="linear-matrix-transform.html">前へ：行列と変換</a>
+        <a href="linear-algebra-01.html">章目次へ</a>
+      </div>
+    </main>
 
-  <footer class="footer">
-    <div class="inner">失われた数学的直観の回復</div>
-  </footer>
-</body>
+    <footer class="footer">
+      <div class="inner">失われた数学的直観の回復</div>
+    </footer>
+  </body>
 </html>
