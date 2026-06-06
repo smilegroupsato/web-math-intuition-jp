@@ -1,1 +1,63 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>方程式と図形はどう対応するか</title><link rel="stylesheet" href="assets/style.css"><script>window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$']]}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script></head><body><header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a><nav class="nav"><a href="index.html">トップ</a><a href="linear-algebra-01.html">線形代数</a><a href="linear-matrix-transform.html">次へ</a></nav></div></header><section class="page-hero"><div class="inner"><div class="eyebrow">Phase 1 / Linear Algebra</div><h1>方程式と図形はどう対応するか</h1><p class="lead">方程式を、計算式ではなく、空間に刻まれた条件として読む。</p></div></section><main class="article-wrap note-content"><h2>0. このノートの位置づけ</h2><p>このページでは、方程式を「答えを出すための式」ではなく、空間の中から条件を満たす点を選び出す装置として扱う。</p><h2>1. 方程式は条件である</h2><p>たとえば、</p><div class="math-block">$$2x+y=3$$</div><p>これは単なる計算式ではなく、「この条件を満たす点だけが並ぶ場所」を表している。</p><p>2次元平面では、それは直線になる。つまり方程式とは、空間の中から、ある条件を満たす点たちを選び出す装置である。</p><blockquote>式は記号ではなく、空間の切り取り方である。</blockquote><h2>2. 座標値と関係</h2><p>点の座標だけを見れば、それは情報である。しかし、点と点の距離、向き、角度、同じ条件を満たすかどうかは関係である。</p><p>線形代数では、この「関係がどう保たれ、どう変形されるか」を見ていく。</p><div class="page-nav"><a href="linear-vector.html">前へ：ベクトルとは何か</a><a href="linear-matrix-transform.html">次へ：行列と空間変形</a></div></main><footer class="footer"><div class="inner">失われた数学的直観の回復</div></footer></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>方程式と図形はどう対応するか</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)'], ['$', '$']],
+        displayMath: [['$$','$$']]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="linear-algebra-01.html">線形代数</a>
+        <a href="linear-matrix-transform.html">次へ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="inner">
+      <div class="eyebrow">Phase 1 / Linear Algebra</div>
+      <h1>方程式と図形はどう対応するか</h1>
+      <p class="lead">方程式を、計算式ではなく、空間に刻まれた条件として読む。</p>
+    </div>
+  </section>
+
+  <main class="article-wrap note-content">
+    <h2>0. このノートの位置づけ</h2>
+    <p>このページでは、方程式を「答えを出すための式」ではなく、空間の中から条件を満たす点を選び出す装置として扱う。</p>
+
+    <h2>1. 方程式は条件である</h2>
+    <p>たとえば、</p>
+    <div class="math-block">$$2x+y=3$$</div>
+    <p>これは単なる計算式ではなく、「この条件を満たす点だけが並ぶ場所」を表している。</p>
+    <p>2次元平面では、それは直線になる。つまり方程式とは、空間の中から、ある条件を満たす点たちを選び出す装置である。</p>
+    <blockquote>式は記号ではなく、空間の切り取り方である。</blockquote>
+
+    <h2>2. 座標値と関係</h2>
+    <p>点の座標だけを見れば、それは情報である。しかし、点と点の距離、向き、角度、同じ条件を満たすかどうかは関係である。</p>
+    <p>線形代数では、この「関係がどう保たれ、どう変形されるか」を見ていく。</p>
+
+    <div class="page-nav">
+      <a href="linear-vector.html">前へ：ベクトルとは何か</a>
+      <a href="linear-matrix-transform.html">次へ：行列と空間変形</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="inner">失われた数学的直観の回復</div>
+  </footer>
+</body>
+</html>
