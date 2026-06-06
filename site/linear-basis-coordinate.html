@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>座標・基底・原点</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v=20260606-notebox">
   <script>
     window.MathJax = {
       tex: {
@@ -57,6 +57,21 @@
     <p>このとき、B座標で \(\begin{pmatrix}2\\1\end{pmatrix}_B\) と表されるベクトルは、標準座標では次のようになる。</p>
     <div class="math-block">$$\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}2\\1\end{pmatrix}=\begin{pmatrix}3\\1\end{pmatrix}$$</div>
     <p>基底を列に並べた行列は、その基底での座標を標準座標へ翻訳する装置である。</p>
+
+    <aside class="note-box">
+      <h3>注記｜「空間全体を張る」とは何か</h3>
+      <p>基底を列に並べた行列が「基底設定の記録」として働くためには、その列ベクトルたちが一次独立であり、さらに空間全体を張っている必要がある。</p>
+      <p>「空間全体を張る」とは、そのベクトルたちを倍率つきで足し合わせることで、対象となる空間のどのベクトルにも届ける、という意味である。</p>
+      <p>たとえば2次元平面で、二本のベクトル \(\mathbf b_1,\mathbf b_2\) が平面全体を張るとは、任意のベクトル \(\mathbf v\) が、</p>
+      <div class="math-block">$$\mathbf v=c_1\mathbf b_1+c_2\mathbf b_2$$</div>
+      <p>という形で表せるということである。ここで \(c_1,c_2\) は実数であり、それぞれの基底ベクトルを何倍使うかを表す。</p>
+      <p>つまり、二本の基底ベクトルを「ものさし」や「移動方向」として使えば、平面のどの場所にも到達できる状態が、平面全体を張っている状態である。3次元空間なら、三本の独立したベクトルを組み合わせることで、空間内の任意のベクトルに届ける必要がある。</p>
+      <p>反対に、二本のベクトルが同じ直線上に並んでいる場合、それらを何倍して足し合わせても、その直線上のベクトルしか作れない。この場合、二本のベクトルは平面全体を張っていない。平面の中の一本の直線だけを張っている。</p>
+      <p>数学的には、ベクトルたち \(\mathbf b_1,\mathbf b_2,\ldots,\mathbf b_n\) が空間 \(V\) を張ることを、</p>
+      <div class="math-block">$$\operatorname{span}(\mathbf b_1,\mathbf b_2,\ldots,\mathbf b_n)=V$$</div>
+      <p>と書く。</p>
+      <p>したがって、行列の列が基底を表すためには、その列ベクトルたちが一次独立で、空間全体を張っていなければならない。そうでない場合、その行列は基底ではなく、次元を潰す変換や、低次元の部分空間だけを表すものになる。</p>
+    </aside>
 
     <h2>4. 点・位置・座標・ベクトル</h2>
     <table>
