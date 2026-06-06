@@ -1,3 +1,4 @@
+# Trigger annotation migration: 2026-06-06 JST
 from pathlib import Path
 import re
 
