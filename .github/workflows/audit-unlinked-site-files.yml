@@ -118,3 +118,5 @@ jobs:
           git add reports/unlinked-site-files.md
           git commit -m "Audit unlinked site HTML files"
           git push
+
+# trigger: 2026-06-07 manual audit refresh
