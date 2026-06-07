@@ -1,1 +1,164 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>原点とは何か｜観測者・座標系・相対性理論への入口</title><meta name="description" content="原点は絶対的に存在するものなのか。観測者・座標系・事象・相対性理論への入口として整理する。"><link rel="stylesheet" href="assets/style.css"><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["$$","$$"]]}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script></head><body><header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a><nav class="nav"><a href="index.html">トップ</a><a href="linear-algebra-01.html">線形代数</a><a href="linear-change-of-basis.html">前へ</a></nav></div></header><section class="page-hero"><div class="inner"><div class="eyebrow">Phase 1 / Linear Algebra</div><h1>原点とは何か</h1><p class="lead">原点は絶対的に存在するものなのか。観測者・座標系・事象・相対性理論への入口として考える。</p><div class="meta"><span>Webページ作成日時：2026-06-06 00:00 JST</span><span>Webページ最終更新日時：2026-06-06 00:00 JST</span></div></div></section><main class="article-wrap note-content"><div class="toc"><b>目次</b><a href="#position">0. このページの位置づけ</a><a href="#question">1. 原点、ってなんだろうね</a><a href="#answer">2. 原点は、絶対的に存在するものではない</a><a href="#relativity">3. 相対性理論では、時間を含む座標で扱う</a><a href="#next">4. 次に進むこと</a></div><h2 id="position">0. このページの位置づけ</h2><p>このページは、座標変換に入る直前の補助線である。</p><p>点とベクトルは数学的対象として扱える。基底・座標・行列は、それらを測る・記述する・変換するための道具である。ただし、行列は単なる道具というより、変換そのものを表す数学的対象でもある。</p><p>ここでは、原点、観測者、座標系、相対性理論への入口を整理する。</p><h2 id="question">1. 原点、ってなんだろうね</h2><h3>ユーザー</h3><blockquote>本題に戻りたい。次は座標変換だっけ？</blockquote><blockquote>その前に、点とベクトルだけが存在する、存在するというか、数学的対象として扱う。基底や座標や行列は、それらを観測し操作するための道具。みたいな理解でいいかな。</blockquote><blockquote>ベクトルは、物理学でいうと運動、しかも等速直線運動の一部を時間 t で切り取ったもの、というイメージ。動いている列車の真ん中にある光源Aから前後に向けて発射された光が、列車の前端B・後端Cまで移動する運動、がベクトル。</blockquote><blockquote>車内の観測者からみると、ベクトルABとACは、同じ座標系で同じ大きさで向きだけが逆。</blockquote><blockquote>車外の観測者からみると、列車の速度によって空間が進行方向にニョーンと変形されるから、ベクトルABとACの大きさが変わる、ということ？</blockquote><blockquote>単純に、A=(1,0), B=(-1,0) とすると、空間自体を進行方向に<div class="math-block">$$\begin{pmatrix}2 & 0\\0 & 1\end{pmatrix}$$</div>という変換をしたら、A’=(2,0)、B’=(-2,0)。なんか違うね。B’=(-0.5,0) みたいになるかと思ったんだけど。</blockquote><blockquote>そして、原点、ってなんだろうね。そんなものあるのかね？観測者ということかな？</blockquote><h2 id="answer">2. 原点は、絶対的に存在するものではない</h2><h3>ChatGPT</h3><p>次は <strong>座標変換</strong> でよい。そして、その前提としての理解はかなり合っている。</p><blockquote>点とベクトルは、数学的対象として扱う。基底・座標・行列は、それらを測る・記述する・変換するための道具である。</blockquote><p>ただし、行列は単なる道具というより、「変換そのもの」を表す数学的対象でもある。</p><p>物理的には、速度が一定なら、</p><div class="math-block">$$\Delta x = v\Delta t$$</div><p>なので、ある時間だけ切り取った運動は、変位ベクトルとして表せる。</p><p>ただし相対性理論では、単なる空間内のベクトルではなく、いつ・どこで起きたか、つまり事象 event を扱う必要がある。</p><h2 id="relativity">3. 相対性理論では、時間を含む座標で扱う</h2><p>相対性理論では、</p><div class="math-block">$$(x,t)$$</div><p>または、</p><div class="math-block">$$(ct,x)$$</div><p>のように時間を含む座標で扱う。</p><p>相対性理論では、空間だけを x → 2x のように変形するのではなく、空間座標と時間座標を混ぜる。</p><div class="math-block">$$x' = \gamma(x - vt)$$</div><div class="math-block">$$t' = \gamma\left(t - \frac{vx}{c^2}\right)$$</div><p>列車の光の話は、空間が前後に単純に伸び縮みする話ではなく、観測者によって「同時刻の切り方」が変わる話である。</p><p>原点は、絶対的に存在するものではなく、座標系を設定するために選ぶ基準である。相対性理論では、原点は空間上の点というより、ある観測者が「ここで、いま」と呼ぶ事象になる。</p><blockquote>原点とは、世界の中心ではなく、座標系を始めるために選ばれた基準である。</blockquote><h2 id="next">4. 次に進むこと</h2><p>次に扱うのは、逆行列である。ある座標表示から元の表示へ戻すには何が必要か。あるいは、そもそも戻れるとはどういうことか。</p><div class="page-nav"><a href="linear-change-of-basis.html">前へ：基底変換</a><a href="linear-algebra-01.html">章目次へ</a><a href="index.html#toc">目次へ</a></div></main><footer class="footer"><div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：2026-06-06 00:00 JST</div></footer></body></html>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>原点とは何か｜観測者・座標系・相対性理論への入口</title>
+    <meta name="description" content="原点は絶対的にあるものなのか。観測者、座標系、事象、相対性理論への入口として、原点を考える。" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"], ["$", "$"]],
+          displayMath: [["$$", "$$"]],
+        },
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
+        <nav class="nav">
+          <a href="index.html">トップ</a>
+          <a href="linear-algebra-01.html">線形代数</a>
+          <a href="linear-change-of-basis.html">前へ</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="page-hero">
+      <div class="inner">
+        <div class="eyebrow">Phase 1 / Linear Algebra</div>
+        <h1>原点とは何か</h1>
+        <p class="lead">観測者・座標系・相対性理論への入口。原点は絶対的に存在するものなのか、それとも座標系を設定するために選ぶ基準なのか。</p>
+        <div class="meta">
+          <span>Webページ作成日時：2026-06-06 00:00 JST</span>
+          <span>Webページ最終更新日時：2026-06-07 10:37 JST</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="article-wrap note-content">
+      <div class="toc">
+        <b>目次</b>
+        <a href="#position">0. このページの位置づけ</a>
+        <a href="#question">1. 座標変換の前に出てきた問い</a>
+        <a href="#point-vector-tools">2. 点・ベクトル・基底・座標・行列</a>
+        <a href="#train-light">3. 列車の光の話</a>
+        <a href="#origin">4. 原点とは何か</a>
+        <a href="#relativity">5. 相対性理論への入口</a>
+        <a href="#next">6. 次に戻る場所</a>
+      </div>
+
+      <h2 id="position">0. このページの位置づけ</h2>
+      <p>このページでは、座標変換へ進む直前に出てきた「原点とは何か」という問いを扱う。</p>
+      <p>ベクトル、基底、座標、行列を学んでいると、ある時点で「そもそも原点とは何か」「どこをゼロと決めているのか」「観測者とは何か」という問いが出てくる。</p>
+      <p>この問いは、単なる補足ではない。座標変換、観測者、相対性理論へ進むための入口である。</p>
+
+      <h2 id="question">1. 座標変換の前に出てきた問い</h2>
+      <h3>ユーザー</h3>
+      <blockquote>本題に戻りたい。次は座標変換だっけ？</blockquote>
+      <blockquote>その前に、点とベクトルだけが存在する、存在するというか、数学的対象として扱う。基底や座標や行列は、それらを観測し操作するための道具。みたいな理解でいいかな。</blockquote>
+      <blockquote>ベクトルは、物理学でいうと運動、しかも等速直線運動の一部を時間 t で切り取ったもの、というイメージ。動いている列車の真ん中にある光源Aから前後に向けて発射された光が、列車の前端B・後端Cまで移動する運動、がベクトル。</blockquote>
+      <blockquote>車内の観測者からみると、ベクトルABとACは、同じ座標系で同じ大きさで向きだけが逆。</blockquote>
+      <blockquote>車外の観測者からみると、列車の速度によって空間が進行方向にニョーンと変形されるから、ベクトルABとACの大きさが変わる、ということ？</blockquote>
+      <blockquote>単純に、A=(1,0), B=(-1,0) とすると、空間自体を進行方向に</blockquote>
+      <div class="math-block">$$
+\begin{pmatrix}
+2 & 0\\
+0 & 1
+\end{pmatrix}
+$$</div>
+      <blockquote>という変換をしたら、A’=(2,0)、B’=(-2,0)。なんか違うね。B’=(-0.5,0) みたいになるかと思ったんだけど。</blockquote>
+      <blockquote>そして、原点、ってなんだろうね。そんなものあるのかね？観測者ということかな？</blockquote>
+
+      <h2 id="point-vector-tools">2. 点・ベクトル・基底・座標・行列</h2>
+      <h3>ChatGPT</h3>
+      <p>次は <strong>座標変換</strong> でよい。そして、その前提としての理解はかなり合っている。</p>
+      <blockquote>点とベクトルは、数学的対象として扱う。基底・座標・行列は、それらを測る・記述する・変換するための道具である。</blockquote>
+      <p>ただし、行列は単なる道具というより、「変換そのもの」を表す数学的対象でもある。</p>
+      <p>ここで分けたいのは、次のこと。</p>
+      <table>
+        <tr><th>もの</th><th>役割</th></tr>
+        <tr><td>点</td><td>空間内の場所として扱われる数学的対象</td></tr>
+        <tr><td>ベクトル</td><td>差分・向き・大きさ・変位として扱われる数学的対象</td></tr>
+        <tr><td>基底</td><td>ベクトルを測るためのものさし</td></tr>
+        <tr><td>座標</td><td>原点と基底を選んだときの表示</td></tr>
+        <tr><td>行列</td><td>変換、または基底・座標変換を表す数学的対象</td></tr>
+      </table>
+      <p>点やベクトルは、座標で表示される前から数学的対象になりうる。ただし、計算し、比較し、測定し、変換するには、基底・座標・行列が必要になる。</p>
+
+      <h2 id="train-light">3. 列車の光の話</h2>
+      <p>物理的には、速度が一定なら、</p>
+      <div class="math-block">$$
+\Delta x = v\Delta t
+$$</div>
+      <p>なので、ある時間だけ切り取った運動は、変位ベクトルとして表せる。</p>
+      <p>ただし相対性理論では、単なる空間内のベクトルではなく、いつ・どこで起きたか、つまり事象 event を扱う必要がある。</p>
+      <div class="math-block">$$
+(x,t)
+$$</div>
+      <p>または、</p>
+      <div class="math-block">$$
+(ct,x)
+$$</div>
+      <p>のように時間を含む座標で扱う。</p>
+      <p>列車の中心にある光源Aから前後に光が出るとする。車内の観測者から見ると、前端Bと後端Cまでの距離は等しく、光は同じ速さで進むので、前後に同時に届くように見える。</p>
+      <p>しかし車外の観測者から見ると、列車は動いている。前端Bは光から逃げる向きに動き、後端Cは光へ近づく向きに動く。ここで問題になるのは、単に空間が前後に伸び縮みすることではなく、観測者によって「同時刻の切り方」が変わることである。</p>
+      <p>したがって、</p>
+      <div class="math-block">$$
+\begin{pmatrix}
+2 & 0\\
+0 & 1
+\end{pmatrix}
+$$</div>
+      <p>のように空間だけを横方向へ伸ばす行列では、相対性理論の本質には届かない。これは空間内の点を横方向に2倍する線形変換であって、時間座標を含まないからである。</p>
+
+      <h2 id="origin">4. 原点とは何か</h2>
+      <p>原点は、絶対的に存在するものではない。</p>
+      <blockquote>原点とは、座標系を設定するために選ぶ基準である。</blockquote>
+      <p>平面上で原点を \(O=(0,0)\) と置くと、点Pの座標を \(P=(3,2)\) のように書ける。しかし、原点を別の場所に置けば、同じ点Pの座標は変わる。</p>
+      <p>つまり、原点は点Pそのものの性質ではない。原点は、点Pをどう記述するかを決める側の設定である。</p>
+      <p>ここで「観測者」という言葉が出てくる。物理で座標系を設定するとき、原点はしばしば、観測者が「ここ」と呼ぶ場所になる。</p>
+      <p>ただし、相対性理論では、原点は単なる空間上の点では足りない。いつ、その場所にいたのか、つまり時間も含める必要がある。</p>
+      <blockquote>相対性理論では、原点は空間上の点というより、ある観測者が「ここで、いま」と呼ぶ事象になる。</blockquote>
+
+      <h2 id="relativity">5. 相対性理論への入口</h2>
+      <p>相対性理論では、空間だけを \(x \mapsto 2x\) のように変形するのではなく、空間座標と時間座標を混ぜる。</p>
+      <div class="math-block">$$
+x' = \gamma(x - vt)
+$$</div>
+      <div class="math-block">$$
+t' = \gamma\left(t - \frac{vx}{c^2}\right)
+$$</div>
+      <p>ここで重要なのは、空間の位置 \(x\) と時間 \(t\) が別々に動くのではなく、観測者の運動状態によって混ざること。</p>
+      <p>だから、列車の光の問題は「空間がニョーンと伸びる」という直観だけではうまく捉えられない。むしろ、観測者によって同時刻面が変わる、という方向に進む必要がある。</p>
+      <p>線形代数の言葉で言えば、ここでは「同じ世界の出来事を、別の座標系で記述する」という問題が起きている。</p>
+      <p>対象そのものが変わるのか。表示が変わるのか。観測者が変わると、何が同じままで、何が変わるのか。</p>
+      <p>この問いが、座標変換から相対性理論への入口になる。</p>
+
+      <h2 id="next">6. 次に戻る場所</h2>
+      <p>ここでいったん数学側へ戻る。</p>
+      <p>次に固めるべきことは、次の区別である。</p>
+      <ul>
+        <li>点そのものと、その座標表示は違う。</li>
+        <li>ベクトルそのものと、その成分表示は違う。</li>
+        <li>原点は、座標系を設定するために選ぶ基準である。</li>
+        <li>観測者が変わると、座標表示が変わる。</li>
+        <li>相対性理論では、空間だけでなく時間も含めた座標変換が必要になる。</li>
+      </ul>
+      <p>このページのあとで、逆行列、写像、像と逆像へ進むと、「変換したものを元に戻すとはどういうことか」「同じ対象を別の表示で扱うとはどういうことか」が見えやすくなる。</p>
+      <div class="page-nav">
+        <a href="linear-change-of-basis.html">前へ：基底変換</a>
+        <a href="linear-algebra-01.html">章目次へ</a>
+        <a href="index.html#toc">目次へ</a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：2026-06-07 10:37 JST</div>
+    </footer>
+  </body>
+</html>
