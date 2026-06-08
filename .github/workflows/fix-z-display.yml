@@ -15,12 +15,11 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
           path = Path('site/image-and-preimage-emotion.html')
           text = path.read_text(encoding='utf-8')
-          text = text.replace('\\(z\n          e0\\)', 'いったん置換')
-          text = text.replace('いったん置換', '\\(z≠0\\)')
-          text = text.replace('2026-06-08 17:40 JST', '2026-06-08 18:10 JST')
-          text = text.replace('2026-06-08 13:25 JST', '2026-06-08 18:10 JST')
+          text = re.sub(r'\\\(z\s*e0\\\)', r'\\(z≠0\\)', text)
+          text = text.replace('2026-06-08 18:10 JST', '2026-06-08 18:20 JST')
           path.write_text(text, encoding='utf-8')
           PY
       - name: Commit
