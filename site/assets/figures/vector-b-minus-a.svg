@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">ベクトル B-A</title>
+  <desc id="desc">点Aから点Bへの差分ベクトルを示す図</desc>
+  <rect width="720" height="420" fill="#fffaf1"/>
+  <g stroke="#d8c7aa" stroke-width="1">
+    <path d="M80 340H660"/><path d="M120 380V40"/>
+    <g opacity=".55">
+      <path d="M200 380V40"/><path d="M280 380V40"/><path d="M360 380V40"/><path d="M440 380V40"/><path d="M520 380V40"/><path d="M600 380V40"/>
+      <path d="M80 300H660"/><path d="M80 260H660"/><path d="M80 220H660"/><path d="M80 180H660"/><path d="M80 140H660"/><path d="M80 100H660"/>
+    </g>
+  </g>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+  <text x="650" y="365" font-family="serif" font-size="22" fill="#18202f">x</text>
+  <text x="96" y="58" font-family="serif" font-size="22" fill="#18202f">y</text>
+  <circle cx="200" cy="220" r="7" fill="#b9965d"/><text x="170" y="245" font-family="serif" font-size="22" fill="#18202f">A=(1,4)</text>
+  <circle cx="440" cy="140" r="7" fill="#b9965d"/><text x="455" y="128" font-family="serif" font-size="22" fill="#18202f">B=(4,6)</text>
+  <path d="M200 220 L440 140" stroke="#385f9f" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M200 220 H440 V140" stroke="#9b7443" stroke-width="2" stroke-dasharray="7 6" fill="none"/>
+  <text x="290" y="165" font-family="serif" font-size="28" fill="#385f9f">B-A=(3,2)</text>
+  <text x="285" y="247" font-family="sans-serif" font-size="18" fill="#7b5a2f">右に3</text>
+  <text x="450" y="190" font-family="sans-serif" font-size="18" fill="#7b5a2f">上に2</text>
+</svg>
