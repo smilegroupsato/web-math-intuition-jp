@@ -8,7 +8,7 @@
       name="description"
       content="写像・像・逆像・情報喪失・不変量から、写真・絵画・逆問題・pre/post攪乱を経て、意味以前・意味以後・意味攪乱としての情緒へ接続する論考。"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260606-note-style4" />
+    <link rel="stylesheet" href="assets/style.css?v=20260608-site-maintenance" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
@@ -32,33 +32,7 @@
         });
       });
     </script>
-
-    <style id="note-box-inline-style">
-      aside.note-box {
-        display: block !important;
-        margin: 32px 0 !important;
-        padding: 20px 22px !important;
-        border: 1px solid rgba(185, 150, 93, 0.38) !important;
-        border-left: 6px solid #b9965d !important;
-        border-radius: 14px !important;
-        background: rgba(255, 250, 241, 0.82) !important;
-        box-shadow: 0 10px 24px rgba(24, 32, 47, 0.06) !important;
-      }
-      aside.note-box h3 {
-        margin-top: 0 !important;
-        font-size: 22px !important;
-        color: #7b5a2f !important;
-      }
-      aside.note-box p,
-      aside.note-box ul,
-      aside.note-box blockquote {
-        font-size: 15px !important;
-      }
-      aside.note-box blockquote {
-        background: rgba(255, 255, 255, 0.62) !important;
-      }
-    </style>
-  </head>
+</head>
   <body>
     <header class="topbar">
       <div class="topbar-inner">
@@ -85,7 +59,7 @@
         </p>
         <div class="meta">
           <span>Webページ作成日時：2026-06-06 00:23 JST</span
-          ><span>Webページ最終更新日時：2026-06-06 00:23 JST</span>
+          ><span>Webページ最終更新日時：2026-06-08 13:25 JST</span>
         </div>
       </div>
     </section>
@@ -114,7 +88,7 @@
       </div>
       <h2 id="position">0. 本論考の位置づけ</h2>
       <p>
-        本論考は、「数学的直観の回復」と、情緒研究／生成AI論／世界性論を接続するための公開論考である。
+        本論考は、写像・像・逆像・情報喪失・不変量を、写真・絵画・観測・復元の問題へ接続するための公開論考である。
       </p>
       <p>
         中心に置くのは、ベクトルを行列で写すとはどういうことか、写されたとき何が保たれ、何が失われるのか、そして像から逆像を復元しようとするとき、観測者は何を期待し、何を補い、何に裏切られるのか、という問いである。
@@ -154,7 +128,7 @@
         ベクトルとは、単なる矢印ではない。空間内の点としても、差分としても、関係としても扱うことができる。行列は、そのベクトルたちが作る関係の網目を、別の空間のなかへ写し取る。
       </p>
       <p>
-        だから、行列による変換を見るときに問うべきことは、単に「どこへ動いたか」ではない。何が保たれたのか。何が変わったのか。何が失われたのか。何が、それでも残ったのか。この問いが、線形代数から情緒研究へ向かう入口になる。
+        だから、行列による変換を見るときに問うべきことは、単に「どこへ動いたか」ではない。何が保たれたのか。何が変わったのか。何が失われたのか。何が、それでも残ったのか。この問いが、線形代数から像を見る経験へ向かう入口になる。
       </p>
 
       <h2 id="image">2. 像とは何か</h2>
@@ -231,6 +205,11 @@
       <p>三次元空間を二次元平面へ写す写像を考える。もっとも基本的な例は、</p>
       <div class="math-block">$$ P:\mathbb{R}^3\to\mathbb{R}^2 $$</div>
       <div class="math-block">$$ P(x,y,z)=(x,y) $$</div>
+
+<figure class="figure-block">
+  <img src="assets/figures/projection-xy.svg" alt="射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。" loading="lazy" />
+  <figcaption>射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。</figcaption>
+</figure>
       <p>である。</p>
       <p>
         これは、三次元ベクトルのうち \(z\) 成分を捨て、\(x,y\)
@@ -258,6 +237,11 @@
       </p>
       <p>数学的には、この同一化は核によって記述される。</p>
       <div class="math-block">$$ \ker P=\{(0,0,z)\mid z\in\mathbb{R}\} $$</div>
+
+<figure class="figure-block">
+  <img src="assets/figures/kernel-z-axis.svg" alt="射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。" loading="lazy" />
+  <figcaption>射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。</figcaption>
+</figure>
       <p>
         これは、\(P\) によってゼロへ潰される方向である。\(z\)
         軸方向の差は、投影後には見えない。
@@ -364,7 +348,7 @@
         ここから、不変量の問いが立ち上がる。ある変換のもとで、何が変わらないのか。変換されてもなお残る構造は何か。
       </p>
       <p>
-        この問いは、線形代数の中心にある。そして同時に、世界性の問いにもつながっている。
+        この問いは、線形代数の中心にある。そして同時に、像と世界の関係を考える入口にもなる。
       </p>
       <p>
         世界は見え方によって変わる。しかし、見え方が変わっても、なお残るものがある。その残るものを、私たちは世界の側の安定性として感じる。逆に、残るはずのものが残らないとき、世界は不穏になる。
@@ -411,7 +395,8 @@
           \(z\) が入るため、\(z=0\) の点では定義できない。
         </p>
         <p>
-          ここでは、簡略化したピンホールカメラモデルを考え、\(z eq0\)
+          ここでは、簡略化したピンホールカメラモデルを考え、\(z
+e0\)
           の領域に限っている。実際のカメラモデルとしては、通常、カメラの前方にある点だけを対象にするため、\(z>0\)
           の領域に制限して考える。
         </p>
@@ -466,6 +451,11 @@
       <p>
         つまり、画像上の一点は、三次元空間内の一点ではなく、視線方向の一本の半直線に対応する。
       </p>
+
+<figure class="figure-block">
+  <img src="assets/figures/perspective-ray-preimage.svg" alt="透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。" loading="lazy" />
+  <figcaption>透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。</figcaption>
+</figure>
       <p>
         写真を見るとは、二次元平面上の点を見ることである。しかし、その点の逆像は、三次元空間内の一点ではない。それは奥行き方向に伸びる、可能な世界の集合である。
       </p>
@@ -850,7 +840,7 @@
       <p>
         数学的な厳密さを失えば、ただの比喩になってしまう。しかし、数学的な厳密さだけに閉じれば、像から世界を作り返す人間の経験には届かない。
       </p>
-      <p>この狭間に、情緒研究の入口がある。</p>
+      <p>この狭間に、情緒との接続の入口がある。</p>
       <p>
         情緒とは、意味になる前のゆらぎであり、意味になった後の残響であり、さらに意味以前と意味以後の順序が攪乱される地点に立ち現れる、候補逆像上の非一様な重みづけと未収束性である。
       </p>
@@ -870,8 +860,7 @@
       <div class="inner">
         <div>失われた数学的直観の回復</div>
         <div>
-          Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：2026-06-06
-          00:23 JST
+          Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：2026-06-08 13:25 JST
         </div>
       </div>
     </footer>

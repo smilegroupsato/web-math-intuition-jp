@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="title desc">
+  <title id="title">像と逆像の関係</title>
+  <desc id="desc">写像F:XからYに対して、部分集合の像と逆像を示す図</desc>
+  <rect width="820" height="460" fill="#fffaf1"/>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+  <ellipse cx="220" cy="230" rx="150" ry="160" fill="rgba(185,150,93,.12)" stroke="#b9965d" stroke-width="3"/>
+  <ellipse cx="600" cy="230" rx="150" ry="160" fill="rgba(56,95,159,.10)" stroke="#385f9f" stroke-width="3"/>
+  <text x="205" y="55" font-family="serif" font-size="28" fill="#18202f">X</text><text x="585" y="55" font-family="serif" font-size="28" fill="#18202f">Y</text>
+  <path d="M350 230 C420 170 470 170 520 220" stroke="#385f9f" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+  <text x="410" y="160" font-family="serif" font-size="28" fill="#385f9f">F</text>
+  <ellipse cx="190" cy="190" rx="58" ry="74" fill="rgba(143,74,58,.20)" stroke="#8f4a3a" stroke-width="3"/><text x="160" y="185" font-family="serif" font-size="24" fill="#8f4a3a">A</text>
+  <ellipse cx="560" cy="190" rx="55" ry="48" fill="rgba(143,74,58,.20)" stroke="#8f4a3a" stroke-width="3"/><text x="518" y="145" font-family="serif" font-size="22" fill="#8f4a3a">F(A)</text>
+  <rect x="585" y="245" width="90" height="70" rx="20" fill="rgba(56,95,159,.18)" stroke="#385f9f" stroke-width="3"/><text x="620" y="286" font-family="serif" font-size="24" fill="#385f9f">B</text>
+  <path d="M180 305 C200 250 235 242 280 275 C252 330 205 340 180 305 Z" fill="rgba(56,95,159,.18)" stroke="#385f9f" stroke-width="3"/><text x="182" y="353" font-family="serif" font-size="22" fill="#385f9f">F⁻¹(B)</text>
+  <text x="102" y="420" font-family="sans-serif" font-size="18" fill="#18202f">A⊂X を写すと F(A)⊂Y</text>
+  <text x="456" y="420" font-family="sans-serif" font-size="18" fill="#18202f">B⊂Y に入る入力全体が F⁻¹(B)</text>
+</svg>

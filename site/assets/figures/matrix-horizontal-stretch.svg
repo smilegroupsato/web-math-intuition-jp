@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">行列による横方向2倍</title>
+  <desc id="desc">変換前の図形と、行列によって横方向に2倍された図形を比較する図</desc>
+  <rect width="760" height="420" fill="#fffaf1"/>
+  <defs><marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker><marker id="arrowGold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#b9965d"/></marker></defs>
+  <g transform="translate(60,40)">
+    <text x="120" y="20" font-family="serif" font-size="24" fill="#18202f">変換前</text>
+    <path d="M40 300H300 M80 330V50" stroke="#d8c7aa" stroke-width="1"/>
+    <g stroke="#eadcc5" stroke-width="1"><path d="M120 330V50"/><path d="M160 330V50"/><path d="M200 330V50"/><path d="M240 330V50"/><path d="M280 330V50"/><path d="M40 260H300"/><path d="M40 220H300"/><path d="M40 180H300"/><path d="M40 140H300"/><path d="M40 100H300"/></g>
+    <polygon points="80,300 200,300 200,220 80,220" fill="rgba(185,150,93,.14)" stroke="#b9965d" stroke-width="3"/>
+    <path d="M80 300 L200 220" stroke="#385f9f" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <text x="108" y="208" font-family="serif" font-size="20" fill="#385f9f">v=(3,2)</text>
+  </g>
+  <g transform="translate(410,40)">
+    <text x="105" y="20" font-family="serif" font-size="24" fill="#18202f">変換後</text>
+    <path d="M20 300H320 M60 330V50" stroke="#d8c7aa" stroke-width="1"/>
+    <g stroke="#eadcc5" stroke-width="1"><path d="M100 330V50"/><path d="M140 330V50"/><path d="M180 330V50"/><path d="M220 330V50"/><path d="M260 330V50"/><path d="M300 330V50"/><path d="M20 260H320"/><path d="M20 220H320"/><path d="M20 180H320"/><path d="M20 140H320"/><path d="M20 100H320"/></g>
+    <polygon points="60,300 300,300 300,220 60,220" fill="rgba(56,95,159,.12)" stroke="#385f9f" stroke-width="3"/>
+    <path d="M60 300 L300 220" stroke="#385f9f" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <text x="150" y="208" font-family="serif" font-size="20" fill="#385f9f">Av=(6,2)</text>
+  </g>
+  <text x="280" y="385" font-family="serif" font-size="24" fill="#18202f">A = ( 2 0 ; 0 1 )：x方向だけ2倍</text>
+</svg>

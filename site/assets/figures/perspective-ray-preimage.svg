@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">透視投影の候補逆像</title>
+  <desc id="desc">画像平面上の1点がカメラ中心を通る半直線に対応する図</desc>
+  <rect width="760" height="460" fill="#fffaf1"/>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+  <circle cx="120" cy="230" r="12" fill="#18202f"/><text x="72" y="260" font-family="serif" font-size="22" fill="#18202f">カメラ中心</text>
+  <rect x="300" y="95" width="16" height="270" fill="rgba(185,150,93,.18)" stroke="#b9965d" stroke-width="2"/>
+  <text x="260" y="80" font-family="serif" font-size="22" fill="#9b7443">画像平面</text>
+  <circle cx="308" cy="205" r="7" fill="#385f9f"/><text x="320" y="198" font-family="serif" font-size="22" fill="#385f9f">y</text>
+  <path d="M120 230 L670 125" stroke="#385f9f" stroke-width="4" marker-end="url(#arrow)"/>
+  <circle cx="430" cy="182" r="6" fill="#8f4a3a"/><circle cx="520" cy="165" r="6" fill="#8f4a3a"/><circle cx="620" cy="146" r="6" fill="#8f4a3a"/>
+  <text x="440" y="215" font-family="serif" font-size="22" fill="#8f4a3a">候補 x</text><text x="532" y="196" font-family="serif" font-size="22" fill="#8f4a3a">候補 x'</text>
+  <text x="372" y="315" font-family="serif" font-size="26" fill="#18202f">F⁻¹({y}) は一点ではなく半直線になる</text>
+</svg>

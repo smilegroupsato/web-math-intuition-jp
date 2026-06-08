@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">核としてのz軸</title>
+  <desc id="desc">射影P(x,y,z)=(x,y)で原点に潰れる入力全体がz軸であることを示す図</desc>
+  <rect width="760" height="460" fill="#fffaf1"/>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#8f4a3a"/></marker></defs>
+  <g transform="translate(160,330)">
+    <path d="M0 0 L420 0 L560 -110 L140 -110 Z" fill="rgba(185,150,93,.12)" stroke="#b9965d" stroke-width="2"/>
+    <path d="M0 0 L420 0" stroke="#333"/><path d="M0 0 L140 -110" stroke="#333"/><path d="M0 60 L0 -270" stroke="#8f4a3a" stroke-width="5" marker-end="url(#arrow)"/>
+    <text x="430" y="16" font-family="serif" font-size="22">x</text><text x="145" y="-120" font-family="serif" font-size="22">y</text><text x="-34" y="-275" font-family="serif" font-size="22" fill="#8f4a3a">z軸</text>
+    <circle cx="0" cy="-200" r="7" fill="#8f4a3a"/><circle cx="0" cy="-100" r="7" fill="#8f4a3a"/><circle cx="0" cy="0" r="7" fill="#8f4a3a"/>
+    <circle cx="0" cy="0" r="10" fill="#385f9f"/><text x="16" y="8" font-family="serif" font-size="22" fill="#385f9f">(0,0)</text>
+    <path d="M0 -200 C80 -180 90 -70 8 -8" stroke="#8f4a3a" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+    <path d="M0 -100 C60 -90 70 -35 8 -8" stroke="#8f4a3a" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+  </g>
+  <text x="190" y="52" font-family="serif" font-size="28" fill="#18202f">ker P = {(0,0,z) | z ∈ R}</text>
+  <text x="212" y="88" font-family="sans-serif" font-size="18" fill="#7b5a2f">z軸上の点はすべて (0,0) に潰れる</text>
+</svg>
