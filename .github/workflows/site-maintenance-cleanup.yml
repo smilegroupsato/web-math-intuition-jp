@@ -1,0 +1,271 @@
+name: Site maintenance cleanup
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/site-maintenance-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply site cleanup and figures
+        run: |
+          set -euo pipefail
+          mkdir -p site/assets/figures
+
+          cat > site/assets/figures/matrix-horizontal-stretch.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+            <title id="title">行列による横方向2倍</title>
+            <desc id="desc">変換前の図形と、行列によって横方向に2倍された図形を比較する図</desc>
+            <rect width="760" height="420" fill="#fffaf1"/>
+            <defs><marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker><marker id="arrowGold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#b9965d"/></marker></defs>
+            <g transform="translate(60,40)">
+              <text x="120" y="20" font-family="serif" font-size="24" fill="#18202f">変換前</text>
+              <path d="M40 300H300 M80 330V50" stroke="#d8c7aa" stroke-width="1"/>
+              <g stroke="#eadcc5" stroke-width="1"><path d="M120 330V50"/><path d="M160 330V50"/><path d="M200 330V50"/><path d="M240 330V50"/><path d="M280 330V50"/><path d="M40 260H300"/><path d="M40 220H300"/><path d="M40 180H300"/><path d="M40 140H300"/><path d="M40 100H300"/></g>
+              <polygon points="80,300 200,300 200,220 80,220" fill="rgba(185,150,93,.14)" stroke="#b9965d" stroke-width="3"/>
+              <path d="M80 300 L200 220" stroke="#385f9f" stroke-width="4" marker-end="url(#arrowBlue)"/>
+              <text x="108" y="208" font-family="serif" font-size="20" fill="#385f9f">v=(3,2)</text>
+            </g>
+            <g transform="translate(410,40)">
+              <text x="105" y="20" font-family="serif" font-size="24" fill="#18202f">変換後</text>
+              <path d="M20 300H320 M60 330V50" stroke="#d8c7aa" stroke-width="1"/>
+              <g stroke="#eadcc5" stroke-width="1"><path d="M100 330V50"/><path d="M140 330V50"/><path d="M180 330V50"/><path d="M220 330V50"/><path d="M260 330V50"/><path d="M300 330V50"/><path d="M20 260H320"/><path d="M20 220H320"/><path d="M20 180H320"/><path d="M20 140H320"/><path d="M20 100H320"/></g>
+              <polygon points="60,300 300,300 300,220 60,220" fill="rgba(56,95,159,.12)" stroke="#385f9f" stroke-width="3"/>
+              <path d="M60 300 L300 220" stroke="#385f9f" stroke-width="4" marker-end="url(#arrowBlue)"/>
+              <text x="150" y="208" font-family="serif" font-size="20" fill="#385f9f">Av=(6,2)</text>
+            </g>
+            <text x="280" y="385" font-family="serif" font-size="24" fill="#18202f">A = ( 2 0 ; 0 1 )：x方向だけ2倍</text>
+          </svg>
+          SVG
+
+          cat > site/assets/figures/change-of-basis.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+            <title id="title">基底変換</title>
+            <desc id="desc">標準基底と別基底を同じ平面上に示し、同じベクトルを別のものさしで測る図</desc>
+            <rect width="760" height="460" fill="#fffaf1"/>
+            <defs><marker id="blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker><marker id="gold" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#b9965d"/></marker><marker id="red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#8f4a3a"/></marker></defs>
+            <g transform="translate(120,360)">
+              <g stroke="#eadcc5" stroke-width="1"><path d="M-60 0H560"/><path d="M0 60V-300"/><path d="M80 60V-300"/><path d="M160 60V-300"/><path d="M240 60V-300"/><path d="M320 60V-300"/><path d="M400 60V-300"/><path d="M480 60V-300"/><path d="M-60 -80H560"/><path d="M-60 -160H560"/><path d="M-60 -240H560"/></g>
+              <path d="M-60 0H560" stroke="#d8c7aa"/><path d="M0 60V-300" stroke="#d8c7aa"/>
+              <path d="M0 0 L80 0" stroke="#888" stroke-width="4" marker-end="url(#blue)"/><text x="82" y="24" font-family="serif" font-size="20" fill="#555">e1</text>
+              <path d="M0 0 L0 -80" stroke="#888" stroke-width="4" marker-end="url(#blue)"/><text x="10" y="-82" font-family="serif" font-size="20" fill="#555">e2</text>
+              <path d="M0 0 L80 -80" stroke="#b9965d" stroke-width="5" marker-end="url(#gold)"/><text x="86" y="-90" font-family="serif" font-size="22" fill="#9b7443">b1=(1,1)</text>
+              <path d="M0 0 L80 80" stroke="#b9965d" stroke-width="5" marker-end="url(#gold)"/><text x="86" y="84" font-family="serif" font-size="22" fill="#9b7443">b2=(1,-1)</text>
+              <path d="M0 0 L240 -80" stroke="#385f9f" stroke-width="5" marker-end="url(#blue)"/><circle cx="240" cy="-80" r="6" fill="#385f9f"/>
+              <text x="250" y="-70" font-family="serif" font-size="24" fill="#385f9f">v</text>
+              <path d="M0 0 L160 -160 L240 -80" stroke="#8f4a3a" stroke-width="2.5" stroke-dasharray="8 6" fill="none"/>
+              <text x="190" y="-180" font-family="serif" font-size="22" fill="#8f4a3a">v = 2b1 + 1b2</text>
+            </g>
+            <text x="95" y="36" font-family="serif" font-size="26" fill="#18202f">対象 v は同じ。測るものさし（基底）が変わる。</text>
+          </svg>
+          SVG
+
+          cat > site/assets/figures/projection-xy.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+            <title id="title">射影 P(x,y,z)=(x,y)</title>
+            <desc id="desc">三次元点がxy平面へ射影される図</desc>
+            <rect width="760" height="460" fill="#fffaf1"/>
+            <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+            <g transform="translate(160,330)">
+              <path d="M0 0 L420 0 L560 -110 L140 -110 Z" fill="rgba(185,150,93,.12)" stroke="#b9965d" stroke-width="2"/>
+              <path d="M0 0 L420 0" stroke="#333"/><path d="M0 0 L140 -110" stroke="#333"/><path d="M0 0 L0 -250" stroke="#333"/>
+              <text x="430" y="16" font-family="serif" font-size="22">x</text><text x="145" y="-120" font-family="serif" font-size="22">y</text><text x="-24" y="-255" font-family="serif" font-size="22">z</text>
+              <circle cx="310" cy="-190" r="7" fill="#385f9f"/><text x="325" y="-195" font-family="serif" font-size="22" fill="#385f9f">(x,y,z)</text>
+              <circle cx="310" cy="-70" r="7" fill="#b9965d"/><text x="325" y="-62" font-family="serif" font-size="22" fill="#9b7443">(x,y)</text>
+              <path d="M310 -185 L310 -78" stroke="#385f9f" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+            </g>
+            <text x="230" y="52" font-family="serif" font-size="28" fill="#18202f">P(x,y,z) = (x,y)</text>
+            <text x="220" y="86" font-family="sans-serif" font-size="18" fill="#7b5a2f">z成分を捨て、xy平面へ落とす</text>
+          </svg>
+          SVG
+
+          cat > site/assets/figures/kernel-z-axis.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+            <title id="title">核としてのz軸</title>
+            <desc id="desc">射影P(x,y,z)=(x,y)で原点に潰れる入力全体がz軸であることを示す図</desc>
+            <rect width="760" height="460" fill="#fffaf1"/>
+            <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#8f4a3a"/></marker></defs>
+            <g transform="translate(160,330)">
+              <path d="M0 0 L420 0 L560 -110 L140 -110 Z" fill="rgba(185,150,93,.12)" stroke="#b9965d" stroke-width="2"/>
+              <path d="M0 0 L420 0" stroke="#333"/><path d="M0 0 L140 -110" stroke="#333"/><path d="M0 60 L0 -270" stroke="#8f4a3a" stroke-width="5" marker-end="url(#arrow)"/>
+              <text x="430" y="16" font-family="serif" font-size="22">x</text><text x="145" y="-120" font-family="serif" font-size="22">y</text><text x="-34" y="-275" font-family="serif" font-size="22" fill="#8f4a3a">z軸</text>
+              <circle cx="0" cy="-200" r="7" fill="#8f4a3a"/><circle cx="0" cy="-100" r="7" fill="#8f4a3a"/><circle cx="0" cy="0" r="7" fill="#8f4a3a"/>
+              <circle cx="0" cy="0" r="10" fill="#385f9f"/><text x="16" y="8" font-family="serif" font-size="22" fill="#385f9f">(0,0)</text>
+              <path d="M0 -200 C80 -180 90 -70 8 -8" stroke="#8f4a3a" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+              <path d="M0 -100 C60 -90 70 -35 8 -8" stroke="#8f4a3a" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+            </g>
+            <text x="190" y="52" font-family="serif" font-size="28" fill="#18202f">ker P = {(0,0,z) | z ∈ R}</text>
+            <text x="212" y="88" font-family="sans-serif" font-size="18" fill="#7b5a2f">z軸上の点はすべて (0,0) に潰れる</text>
+          </svg>
+          SVG
+
+          cat > site/assets/figures/perspective-ray-preimage.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+            <title id="title">透視投影の候補逆像</title>
+            <desc id="desc">画像平面上の1点がカメラ中心を通る半直線に対応する図</desc>
+            <rect width="760" height="460" fill="#fffaf1"/>
+            <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+            <circle cx="120" cy="230" r="12" fill="#18202f"/><text x="72" y="260" font-family="serif" font-size="22" fill="#18202f">カメラ中心</text>
+            <rect x="300" y="95" width="16" height="270" fill="rgba(185,150,93,.18)" stroke="#b9965d" stroke-width="2"/>
+            <text x="260" y="80" font-family="serif" font-size="22" fill="#9b7443">画像平面</text>
+            <circle cx="308" cy="205" r="7" fill="#385f9f"/><text x="320" y="198" font-family="serif" font-size="22" fill="#385f9f">y</text>
+            <path d="M120 230 L670 125" stroke="#385f9f" stroke-width="4" marker-end="url(#arrow)"/>
+            <circle cx="430" cy="182" r="6" fill="#8f4a3a"/><circle cx="520" cy="165" r="6" fill="#8f4a3a"/><circle cx="620" cy="146" r="6" fill="#8f4a3a"/>
+            <text x="440" y="215" font-family="serif" font-size="22" fill="#8f4a3a">候補 x</text><text x="532" y="196" font-family="serif" font-size="22" fill="#8f4a3a">候補 x'</text>
+            <text x="372" y="315" font-family="serif" font-size="26" fill="#18202f">F⁻¹({y}) は一点ではなく半直線になる</text>
+          </svg>
+          SVG
+
+          cat > site/assets/figures/image-preimage-map.svg <<'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" role="img" aria-labelledby="title desc">
+            <title id="title">像と逆像の関係</title>
+            <desc id="desc">写像F:XからYに対して、部分集合の像と逆像を示す図</desc>
+            <rect width="820" height="460" fill="#fffaf1"/>
+            <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#385f9f"/></marker></defs>
+            <ellipse cx="220" cy="230" rx="150" ry="160" fill="rgba(185,150,93,.12)" stroke="#b9965d" stroke-width="3"/>
+            <ellipse cx="600" cy="230" rx="150" ry="160" fill="rgba(56,95,159,.10)" stroke="#385f9f" stroke-width="3"/>
+            <text x="205" y="55" font-family="serif" font-size="28" fill="#18202f">X</text><text x="585" y="55" font-family="serif" font-size="28" fill="#18202f">Y</text>
+            <path d="M350 230 C420 170 470 170 520 220" stroke="#385f9f" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+            <text x="410" y="160" font-family="serif" font-size="28" fill="#385f9f">F</text>
+            <ellipse cx="190" cy="190" rx="58" ry="74" fill="rgba(143,74,58,.20)" stroke="#8f4a3a" stroke-width="3"/><text x="160" y="185" font-family="serif" font-size="24" fill="#8f4a3a">A</text>
+            <ellipse cx="560" cy="190" rx="55" ry="48" fill="rgba(143,74,58,.20)" stroke="#8f4a3a" stroke-width="3"/><text x="518" y="145" font-family="serif" font-size="22" fill="#8f4a3a">F(A)</text>
+            <rect x="585" y="245" width="90" height="70" rx="20" fill="rgba(56,95,159,.18)" stroke="#385f9f" stroke-width="3"/><text x="620" y="286" font-family="serif" font-size="24" fill="#385f9f">B</text>
+            <path d="M180 305 C200 250 235 242 280 275 C252 330 205 340 180 305 Z" fill="rgba(56,95,159,.18)" stroke="#385f9f" stroke-width="3"/><text x="182" y="353" font-family="serif" font-size="22" fill="#385f9f">F⁻¹(B)</text>
+            <text x="102" y="420" font-family="sans-serif" font-size="18" fill="#18202f">A⊂X を写すと F(A)⊂Y</text>
+            <text x="456" y="420" font-family="sans-serif" font-size="18" fill="#18202f">B⊂Y に入る入力全体が F⁻¹(B)</text>
+          </svg>
+          SVG
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          ROOT=Path('site')
+          STAMP='2026-06-08 13:25 JST'
+          CSS_VERSION='20260608-site-maintenance'
+          FIG=lambda name,cap: f'''\n<figure class="figure-block">\n  <img src="assets/figures/{name}" alt="{cap}" loading="lazy" />\n  <figcaption>{cap}</figcaption>\n</figure>\n'''
+          pages = [p for p in ROOT.glob('*.html')]
+
+          def read(p): return p.read_text(encoding='utf-8')
+          def write(p,s): p.write_text(s,encoding='utf-8')
+          def clean_common(html):
+              html = re.sub(r'\n\s*<style id="note-box-inline-style">.*?</style>\s*', '\n', html, flags=re.S)
+              html = re.sub(r'href="assets/style\.css(?:\?v=[^"]*)?"', f'href="assets/style.css?v={CSS_VERSION}"', html)
+              html = re.sub(r'Webページ最終更新日時：[^<]*?JST', f'Webページ最終更新日時：{STAMP}', html)
+              html = re.sub(r'最終更新日時：\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s+JST', f'最終更新日時：{STAMP}', html)
+              return html
+          def insert_after(html, marker, snippet):
+              if snippet.strip() in html or marker not in html:
+                  return html
+              return html.replace(marker, marker + snippet, 1)
+          def insert_before(html, marker, snippet):
+              if snippet.strip() in html or marker not in html:
+                  return html
+              return html.replace(marker, snippet + marker, 1)
+
+          css_path=ROOT/'assets/style.css'
+          css=read(css_path)
+          css=re.sub(r'aside\.note-box\{.*?aside\.note-box blockquote\{.*?\}', '', css)
+          if '.figure-block' not in css:
+              css += '.figure-block{margin:30px 0;padding:18px;border:1px solid rgba(24,32,47,.14);border-radius:16px;background:rgba(255,255,255,.64);box-shadow:0 10px 24px rgba(24,32,47,.05)}.figure-block img{display:block;width:100%;height:auto;border-radius:12px;background:#fff}.figure-block figcaption{margin-top:10px;font-size:14px;color:#5b6475;line-height:1.6}.note-box{margin:32px 0;padding:20px 22px;border:1px solid rgba(185,150,93,.38);border-left:6px solid #b9965d;border-radius:14px;background:rgba(255,250,241,.82);box-shadow:0 10px 24px rgba(24,32,47,.06)}.note-box h3{margin-top:0;font-size:22px;color:#7b5a2f}.note-box p,.note-box ul,.note-box blockquote{font-size:15px}.note-box blockquote{background:rgba(255,255,255,.62)}'
+          write(css_path, css)
+
+          for p in pages:
+              write(p, clean_common(read(p)))
+
+          # linear algebra index as official chapter TOC
+          la=ROOT/'linear-algebra-01.html'
+          if la.exists():
+              html=read(la)
+              html=re.sub(r'<title>.*?</title>', '<title>線形代数｜章目次</title>', html)
+              html=html.replace('線形代数①｜ベクトル・基底・座標変換', '線形代数｜章目次')
+              html=html.replace('Phase 1「関係の数学としての線形代数」の入口。ベクトル、方程式と図形、行列、基底、座標変換へ進むための目次ページ。', 'Phase 1「関係の数学としての線形代数」の章目次。ベクトル、方程式と図形、行列、基底、座標変換、像と逆像へ進むための入口。')
+              html=html.replace('<li><span>像と逆像</span><span class="status plan">予定</span></li>', '<li><a href="image-and-preimage-emotion.html">像と逆像</a><span class="status live">公開中</span></li>')
+              html=html.replace('<div class="inner">失われた数学的直観の回復</div>', f'<div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：{STAMP}</div>')
+              write(la,html)
+
+          # vector figure
+          p=ROOT/'linear-vector.html'
+          if p.exists():
+              html=read(p)
+              fig=FIG('vector-b-minus-a.svg','点Aから点Bへの差分ベクトル B-A。A=(1,4), B=(4,6) なら B-A=(3,2)。')
+              html=insert_after(html, '<p>になる。つまり、AからBへ行くには、右に3、上に2だけ進めばよい。</p>\n', fig)
+              html=html.replace('<div class="inner">失われた数学的直観の回復</div>', f'<div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：{STAMP}</div>')
+              write(p,html)
+
+          # matrix figure
+          p=ROOT/'linear-matrix-transform.html'
+          if p.exists():
+              html=read(p)
+              fig=FIG('matrix-horizontal-stretch.svg','行列 A=(2 0; 0 1) によって、ベクトルや図形が横方向に2倍へ伸びる。')
+              html=insert_after(html, '<div class="math-block">$$\begin{pmatrix}2&0\\0&1\end{pmatrix}\begin{pmatrix}3\\2\end{pmatrix}=\begin{pmatrix}6\\2\end{pmatrix}$$</div>\n', fig)
+              html=html.replace('<div class="inner">失われた数学的直観の回復</div>', f'<div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：{STAMP}</div>')
+              write(p,html)
+
+          # basis figure
+          p=ROOT/'linear-basis-coordinate.html'
+          if p.exists():
+              html=read(p)
+              fig=FIG('change-of-basis.svg','標準基底 e1,e2 と斜め基底 b1,b2。同じベクトル v を別のものさしで測る。')
+              html=insert_after(html, '<p>\n        基底を列に並べた行列は、その基底での座標を標準座標へ翻訳する装置である。\n      </p>\n', fig)
+              html=html.replace('<div class="inner">失われた数学的直観の回復</div>', f'<div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：{STAMP}</div>')
+              write(p,html)
+
+          # image/preimage figures + cleanup public positioning wording
+          p=ROOT/'image-and-preimage-emotion.html'
+          if p.exists():
+              html=read(p)
+              html=html.replace('本論考は、「数学的直観の回復」と、情緒研究／生成AI論／世界性論を接続するための公開論考である。','本論考は、写像・像・逆像・情報喪失・不変量を、写真・絵画・観測・復元の問題へ接続するための公開論考である。')
+              html=html.replace('この問いが、線形代数から情緒研究へ向かう入口になる。','この問いが、線形代数から像を見る経験へ向かう入口になる。')
+              html=html.replace('この問いは、線形代数の中心にある。そして同時に、世界性の問いにもつながっている。','この問いは、線形代数の中心にある。そして同時に、像と世界の関係を考える入口にもなる。')
+              html=html.replace('この狭間に、情緒研究の入口がある。','この狭間に、情緒との接続の入口がある。')
+              html=html.replace('z eq0','z\ne0')
+              fig1=FIG('image-preimage-map.svg','写像 F:X→Y における像 F(A) と逆像 F⁻¹(B) の関係。')
+              html=insert_after(html, '<div class="math-block">$$ F:X\to Y $$</div>\n', fig1)
+              fig2=FIG('projection-xy.svg','射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。')
+              html=insert_after(html, '<div class="math-block">$$ P(x,y,z)=(x,y) $$</div>\n', fig2)
+              fig3=FIG('kernel-z-axis.svg','射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。')
+              html=insert_after(html, '<div class="math-block">$$ \ker P=\{(0,0,z)\mid z\in\mathbb{R}\} $$</div>\n', fig3)
+              fig4=FIG('perspective-ray-preimage.svg','透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。')
+              html=insert_after(html, '<p>\n        つまり、画像上の一点は、三次元空間内の一点ではなく、視線方向の一本の半直線に対応する。\n      </p>\n', fig4)
+              html=html.replace('Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：2026-06-06\n          00:23 JST', f'Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：{STAMP}')
+              write(p,html)
+
+          # Cleanup temporary workflows and scripts. Keep deploy.yml only.
+          cleanup_paths = [
+              Path('.github/workflows/format-information-page.yml'),
+              Path('.github/workflows/replace-public-name.yml'),
+              Path('.github/workflows/site-maintenance-cleanup.yml'),
+              Path('.github/scripts/move_annotation_notes.py'),
+              Path('.github/scripts/fix_note_boxes_and_add_bayes.py'),
+              Path('.github/scripts/fix_bayes_math_escapes.py'),
+          ]
+          for cp in cleanup_paths:
+              if cp.exists():
+                  cp.unlink()
+          scripts_dir=Path('.github/scripts')
+          if scripts_dir.exists() and not any(scripts_dir.iterdir()):
+              scripts_dir.rmdir()
+          PY
+
+      - name: Commit maintenance changes
+        run: |
+          if git diff --quiet; then
+            echo "No maintenance changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Clean site structure and add explanatory figures"
+          git push
