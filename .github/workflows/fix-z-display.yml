@@ -1,0 +1,32 @@
+name: Fix z display
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/fix-z-display.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch HTML
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('site/image-and-preimage-emotion.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('\\(z\n          e0\\)', 'いったん置換')
+          text = text.replace('いったん置換', '\\(z≠0\\)')
+          text = text.replace('2026-06-08 17:40 JST', '2026-06-08 18:10 JST')
+          text = text.replace('2026-06-08 13:25 JST', '2026-06-08 18:10 JST')
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name github-actions-bot
+          git config user.email actions@example.com
+          git add site/image-and-preimage-emotion.html
+          git commit -m "Fix z display notation" || exit 0
+          git push
