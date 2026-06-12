@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>核と像｜潰れる方向と残る方向</title>
+  <meta name="description" content="核・像・階数・退化次数・ゼロ写像を、何が残り何が潰れるのかという線形代数の直観から整理する。" />
+  <link rel="stylesheet" href="assets/style.css?v=20260612-linear-pages" />
+  <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["$$","$$"]]}};</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="linear-algebra-01.html">線形代数</a>
+        <a href="linear-inverse-matrix.html">前へ</a>
+        <a href="image-and-preimage-emotion.html">接続ノート</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="inner">
+      <div class="eyebrow">Phase 1 / Linear Algebra</div>
+      <h1>核と像</h1>
+      <p class="lead">潰れる方向と残る方向。次元が落ちるとは何が失われ、何が残ることなのかを、像・核・階数・退化次数から整理する。</p>
+      <div class="meta">
+        <span>Webページ作成日時：2026-06-12 15:40 JST</span>
+        <span>Webページ最終更新日時：2026-06-12 15:40 JST</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="article-wrap note-content">
+    <div class="toc">
+      <b>目次</b>
+      <a href="#position">0. このページの位置づけ</a>
+      <a href="#image">1. 像とは何か</a>
+      <a href="#preimage">2. 逆像は一点ではなく集合になる</a>
+      <a href="#kernel">3. 核とは何か</a>
+      <a href="#projection">4. 射影 P(x,y,z)=(x,y)</a>
+      <a href="#same-image">5. 同じ像へ潰れる点たち</a>
+      <a href="#matrix-examples">6. 2行3列・1行3列の写像</a>
+      <a href="#zero-map">7. ゼロ写像</a>
+      <a href="#rank-nullity">8. 階数・退化次数・階数退化次数定理</a>
+      <a href="#meaning">9. 何が残り、何が失われるのか</a>
+      <a href="#next">10. 次に進むこと</a>
+    </div>
+
+    <h2 id="position">0. このページの位置づけ</h2>
+    <p>このページでは、線形写像における像・逆像・核・階数・退化次数を扱う。</p>
+    <p>前のページでは、逆行列を「元に戻せる変換」として見た。しかし、すべての変換が戻せるわけではない。むしろ、重要なのは戻せない変換で何が起きているかである。</p>
+    <p>戻せない変換では、異なる入力が同じ出力へ潰れる。そのとき、何が出力側に残り、何が入力側で失われるのか。この構造を記述するのが、像と核である。</p>
+
+    <h2 id="image">1. 像とは何か</h2>
+    <p>写像 \(A:V\to W\) があり、ベクトル \(\mathbf v\in V\) が与えられているとする。このとき、\(\mathbf v\) が写像 \(A\) によって送られた先、すなわち</p>
+    <div class="math-block">$$A\mathbf v\in W$$</div>
+    <p>を、\(\mathbf v\) の像という。</p>
+    <div class="math-block">$$\mathbf v\mapsto A\mathbf v$$</div>
+    <p>この意味で、像とは単なる「結果」ではない。像とは、写像によって構造的に生じた出力である。</p>
+    <p>さらに、ひとつのベクトルの像だけでなく、写像 \(A\) が到達しうる出力全体も像と呼ばれる。これは \(A\) の像、あるいは像空間と呼ばれる。</p>
+    <div class="math-block">$$\operatorname{Im}A=\{A\mathbf v\mid \mathbf v\in V\}$$</div>
+    <p>たとえば、\(A:\mathbb R^3\to\mathbb R^2\) が三次元ベクトルを二次元ベクトルへ送るなら、\(\operatorname{Im}A\) は、三次元空間の点たちが写された先としての二次元側の集合である。</p>
+    <p>像とは、入力空間そのものではない。しかし、入力空間と無関係なものでもない。像とは、ある写像を通って現れた、変換後の姿である。</p>
+
+    <h2 id="preimage">2. 逆像は一点ではなく集合になる</h2>
+    <p>像を見るとき、私たちはしばしば、その像がどこから来たのかを考える。数学的には、これは逆像の問題である。</p>
+    <p>写像 \(A:V\to W\) と、出力側の点 \(\mathbf q\in W\) が与えられたとき、</p>
+    <div class="math-block">$$A\mathbf p=\mathbf q$$</div>
+    <p>を満たす入力 \(\mathbf p\in V\) の集合を、\(\mathbf q\) の逆像という。正確には、</p>
+    <div class="math-block">$$A^{-1}(\{\mathbf q\})=\{\mathbf p\in V\mid A\mathbf p=\mathbf q\}$$</div>
+    <p>である。</p>
+    <p>ここで注意が必要である。記号 \(A^{-1}\) は、必ずしも逆行列を意味しない。逆行列が存在しない場合でも、ある出力に対して「それに写る入力全体」を考えることはできる。これが逆像である。</p>
+    <p>もし \(A\) が正則行列で、逆行列 \(A^{-1}\) を持つなら、任意の \(\mathbf q\) に対して入力は一意に決まる。</p>
+    <div class="math-block">$$\mathbf p=A^{-1}\mathbf q$$</div>
+    <p>しかし、逆像は常に一点とは限らない。</p>
+    <p>簡単な例として、次の関数を考える。</p>
+    <div class="math-block">$$f(x)=x^2$$</div>
+    <p>このとき、</p>
+    <div class="math-block">$$f(2)=4,\qquad f(-2)=4$$</div>
+    <p>である。したがって、\(4\) の逆像は一点ではなく、</p>
+    <div class="math-block">$$f^{-1}(\{4\})=\{2,-2\}$$</div>
+    <p>である。</p>
+    <p>同じ像に、複数の入力が対応している。この時点で、像から逆像を復元することは、すでに一意ではなくなる。</p>
+    <p>線形変換でも同じことが起きる。とくに、次元を潰す写像では、異なる入力が同じ出力へ重なる。像はある。しかし、その像がどこから来たのかは、一点には決まらない。</p>
+
+    <h2 id="kernel">3. 核とは何か</h2>
+    <p>核とは、写像によってゼロへ潰される入力全体である。</p>
+    <p>線形写像 \(A:V\to W\) について、</p>
+    <div class="math-block">$$\ker A=\{\mathbf v\in V\mid A\mathbf v=\mathbf 0\}$$</div>
+    <p>を \(A\) の核という。</p>
+    <p>核は、その写像によって失われる方向を表している。</p>
+    <blockquote>核とは、「この方向に違っていても、写像後には違いとして見えなくなる」方向の集まりである。</blockquote>
+    <p>逆行列が存在する変換では、核はゼロベクトルだけになる。</p>
+    <div class="math-block">$$\ker A=\{\mathbf 0\}$$</div>
+    <p>これは、ゼロ以外に潰れる方向がないということである。つまり、異なる入力が同じ出力へ重ならない。</p>
+    <p>逆に、ゼロ以外のベクトルが核に入っているなら、その方向の差は出力側で消える。すると変換は一意には戻せない。</p>
+
+    <h2 id="projection">4. 射影 P(x,y,z)=(x,y)</h2>
+    <p>三次元空間を二次元平面へ写す写像を考える。もっとも基本的な例は、</p>
+    <div class="math-block">$$P:\mathbb R^3\to\mathbb R^2$$</div>
+    <div class="math-block">$$P(x,y,z)=(x,y)$$</div>
+    <figure class="figure-block">
+      <img src="assets/figures/projection-xy.svg" alt="射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。" loading="lazy" />
+      <figcaption>射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。</figcaption>
+    </figure>
+    <p>である。</p>
+    <p>これは、三次元ベクトルのうち \(z\) 成分を捨て、\(x,y\) 成分だけを残す写像である。行列で書けば、</p>
+    <div class="math-block">$$P=\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix}$$</div>
+    <p>であり、</p>
+    <div class="math-block">$$P\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}x\\y\end{pmatrix}$$</div>
+    <p>となる。</p>
+    <p>このとき、</p>
+    <div class="math-block">$$(x,y,0),\qquad (x,y,1),\qquad (x,y,100)$$</div>
+    <p>はすべて同じ</p>
+    <div class="math-block">$$(x,y)$$</div>
+    <p>に写る。</p>
+    <p>つまり、三次元空間内では異なる点だったものが、二次元平面上では同じ点として扱われる。</p>
+    <p>これが、次元が落ちるということの基本形である。次元が落ちるとは、単に「立体が平面に見える」ということではない。複数の入力が、同じ出力へ同一化されることである。</p>
+    <p>この同一化を、核によって記述できる。</p>
+    <div class="math-block">$$\ker P=\{(0,0,z)\mid z\in\mathbb R\}$$</div>
+    <figure class="figure-block">
+      <img src="assets/figures/kernel-z-axis.svg" alt="射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。" loading="lazy" />
+      <figcaption>射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。</figcaption>
+    </figure>
+    <p>これは、\(P\) によってゼロへ潰される方向である。\(z\) 軸方向の差は、投影後には見えない。</p>
+
+    <h2 id="same-image">5. 同じ像へ潰れる点たち</h2>
+    <p>先ほどの写像</p>
+    <div class="math-block">$$P(x,y,z)=(x,y)$$</div>
+    <p>では、出力 \((x,y)\) を見ても、もとの \(z\) 成分は分からない。</p>
+    <div class="math-block">$$P^{-1}(\{(x,y)\})=\{(x,y,z)\mid z\in\mathbb R\}$$</div>
+    <p>つまり、ひとつの二次元点 \((x,y)\) の背後には、無数の三次元点がある。逆像は一点ではなく、一本の直線になる。</p>
+    <p>このとき失われているのは、\(z\) 方向の情報である。</p>
+    <p>だが、情報喪失とは「すべてが分からなくなる」ことではない。失われるものがある一方で、残るものもある。</p>
+    <p>\(P(x,y,z)=(x,y)\) では、\(z\) 成分は失われる。しかし、\(x\) と \(y\) の情報は残る。平面上の配置、左右上下の関係、ある種の距離、境界、並び、交差、接続関係は残る。</p>
+    <p>情報喪失とは、単なる欠落ではない。それは、ある差異が見えなくなり、別の差異は残るという、構造的な選別である。</p>
+    <p>線形写像 \(A\) について、二つの入力 \(\mathbf u,\mathbf v\) が同じ像を持つ条件は、</p>
+    <div class="math-block">$$A\mathbf u=A\mathbf v$$</div>
+    <p>である。これは</p>
+    <div class="math-block">$$A(\mathbf u-\mathbf v)=\mathbf 0$$</div>
+    <p>と同値である。つまり、</p>
+    <div class="math-block">$$\mathbf u-\mathbf v\in\ker A$$</div>
+    <p>である。</p>
+    <blockquote>同じ像へ潰れる二つの点の差は、核に属している。</blockquote>
+    <p>ここに、情報喪失の正確な形がある。失われた情報とは、核の方向の差異である。</p>
+
+    <h2 id="matrix-examples">6. 2行3列・1行3列の写像</h2>
+    <p>写像の行列の形を見ると、入力側の次元と出力側の次元が分かる。</p>
+    <p>たとえば、2行3列の行列は、三次元ベクトルを二次元ベクトルへ送る。</p>
+    <div class="math-block">$$A:\mathbb R^3\to\mathbb R^2$$</div>
+    <div class="math-block">$$A=\begin{pmatrix}1&0&0\\0&1&0\end{pmatrix}$$</div>
+    <p>これは、先ほどの射影 \(P(x,y,z)=(x,y)\) である。この写像では、\(z\) 方向が潰れる。像は二次元平面全体で、核はz軸である。</p>
+    <p>一方、1行3列の行列は、三次元ベクトルを一次元の数へ送る。</p>
+    <div class="math-block">$$B:\mathbb R^3\to\mathbb R$$</div>
+    <div class="math-block">$$B=\begin{pmatrix}1&0&0\end{pmatrix}$$</div>
+    <p>この写像は、</p>
+    <div class="math-block">$$B(x,y,z)=x$$</div>
+    <p>である。出力として残るのは \(x\) 成分だけであり、\(y,z\) 方向の違いは失われる。</p>
+    <p>このとき、核は</p>
+    <div class="math-block">$$\ker B=\{(0,y,z)\mid y,z\in\mathbb R\}$$</div>
+    <p>になる。これは \(yz\) 平面である。</p>
+    <p>つまり、1行3列の写像では、核が平面になることがある。三次元のうち、二つの方向が出力側で見えなくなるからである。</p>
+    <p>このように、どの成分・どの方向が潰れるかは、行列の形と階数によって決まる。</p>
+
+    <h2 id="zero-map">7. ゼロ写像</h2>
+    <p>もっとも極端な例が、ゼロ写像である。</p>
+    <p>ゼロ写像 \(Z:V\to W\) は、すべての入力をゼロへ送る。</p>
+    <div class="math-block">$$Z(\mathbf v)=\mathbf 0$$</div>
+    <p>このとき、像はゼロだけである。</p>
+    <div class="math-block">$$\operatorname{Im}Z=\{\mathbf 0\}$$</div>
+    <p>像の次元は0である。出力側には広がりが残っていない。</p>
+    <p>一方、核は入力空間全体である。</p>
+    <div class="math-block">$$\ker Z=V$$</div>
+    <p>なぜなら、すべての入力がゼロへ写るからである。</p>
+    <p>つまり、ゼロ写像では、入力側のすべての方向が潰れる。出力側から見ると、どの入力も同じゼロに見える。</p>
+    <p>このとき、ゼロの逆像は入力空間全体である。</p>
+    <div class="math-block">$$Z^{-1}(\{\mathbf 0\})=V$$</div>
+    <p>逆に、ゼロ以外の出力に対する逆像は空集合である。</p>
+    <div class="math-block">$$Z^{-1}(\{\mathbf w\})=\varnothing\qquad (\mathbf w\ne\mathbf 0)$$</div>
+    <p>ゼロ写像は、「全部失われる」とはどういうことかを見るための極端なモデルである。</p>
+    <blockquote>像は0次元に潰れ、核は入力空間全体になる。</blockquote>
+
+    <h2 id="rank-nullity">8. 階数・退化次数・階数退化次数定理</h2>
+    <p>階数とは、像の次元である。</p>
+    <div class="math-block">$$\operatorname{rank}A=\dim(\operatorname{Im}A)$$</div>
+    <p>つまり、写像後に出力側へどれだけの広がりが残っているかを表す。</p>
+    <p>退化次数とは、核の次元である。</p>
+    <div class="math-block">$$\operatorname{nullity}A=\dim(\ker A)$$</div>
+    <p>つまり、入力側でどれだけの方向がゼロへ潰れているかを表す。</p>
+    <p>有限次元ベクトル空間では、次の関係が成り立つ。</p>
+    <div class="math-block">$$\dim V=\operatorname{rank}A+\operatorname{nullity}A$$</div>
+    <p>これは階数退化次数定理である。</p>
+    <p>入力空間の次元は、像として残る次元と、核として潰れる次元に分かれる。</p>
+    <p>三次元から二次元への射影 \(P(x,y,z)=(x,y)\) では、入力空間の次元は3である。像は二次元、核はz軸なので一次元である。</p>
+    <div class="math-block">$$3=2+1$$</div>
+    <p>三次元から一次元へ \(B(x,y,z)=x\) と写す場合、像は一次元、核は \(yz\) 平面なので二次元である。</p>
+    <div class="math-block">$$3=1+2$$</div>
+    <p>ゼロ写像 \(Z:V\to W\) では、像は0次元、核は \(V\) 全体である。</p>
+    <div class="math-block">$$\dim V=0+\dim V$$</div>
+    <p>この定理は、単なる次元の帳尻合わせではない。何が出力側に残り、何が入力側で潰れるのかを、次元として正確に分けている。</p>
+
+    <h2 id="meaning">9. 何が残り、何が失われるのか</h2>
+    <p>線形変換を考えるとき、もっとも重要なのは、何が変わるかだけではない。何が変わらないかである。</p>
+    <p>一般の線形写像は、長さや角度を必ずしも保たない。面積や体積も保つとは限らない。直交性も保たないことがある。</p>
+    <p>しかし、すべての線形写像は、線形結合の構造を保つ。</p>
+    <div class="math-block">$$A(a\mathbf u+b\mathbf v)=aA\mathbf u+bA\mathbf v$$</div>
+    <p>これは、\(\mathbf u\) と \(\mathbf v\) から作られる関係が、写像後にも対応する形で残るということである。</p>
+    <p>また、線形写像は部分空間を部分空間へ送る。直線は、点に潰れる場合を除けば直線へ写る。平面は、平面・直線・点のいずれかへ写る。</p>
+    <p>すべてが保存されるわけではない。しかし、すべてが壊れるわけでもない。</p>
+    <p>次元落ちとは、世界が曖昧に見えることではない。どの方向が残り、どの方向が潰れるのかが、写像によって厳密に決まっているということである。</p>
+    <blockquote>情報喪失とは、単なる欠落ではない。それは、ある差異が見えなくなり、別の差異は残るという、構造的な選別である。</blockquote>
+
+    <h2 id="next">10. 次に進むこと</h2>
+    <p>ここまでで、像・逆像・核・階数・退化次数を整理した。これにより、次元が落ちる変換で何が失われ、何が残るのかが見えるようになる。</p>
+    <p>この先は、接続ノート「像から逆像へ」で、線形写像から写真・絵画・遠近法・観測・候補逆像へ進む。また、線形代数の本筋としては、固有値・固有ベクトルへ進むことができる。</p>
+    <div class="page-nav">
+      <a href="linear-inverse-matrix.html">前へ：逆行列</a>
+      <a href="image-and-preimage-emotion.html">接続ノート：像から逆像へ</a>
+      <a href="linear-algebra-01.html">章目次へ</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：2026-06-12 15:40 JST</div>
+  </footer>
+</body>
+</html>
