@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>逆行列｜元の座標へ戻すとはどういうことか</title>
+  <meta name="description" content="逆行列とは何か。元に戻せる変換、単位行列、正則性、行列式が0でないこと、基底変換との関係、逆像との違いを整理する。" />
+  <link rel="stylesheet" href="assets/style.css?v=20260612-linear-pages" />
+  <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"],["$","$"]],displayMath:[["$$","$$"]]}};</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">失われた数学的直観の回復<small>Recovering Mathematical Intuition</small></a>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="linear-algebra-01.html">線形代数</a>
+        <a href="linear-change-of-basis.html">前へ</a>
+        <a href="linear-kernel-image-rank.html">次へ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="inner">
+      <div class="eyebrow">Phase 1 / Linear Algebra</div>
+      <h1>逆行列</h1>
+      <p class="lead">元の座標へ戻すとはどういうことか。戻せる変換と戻せない変換の境目を、基底変換・情報喪失・逆像への入口として整理する。</p>
+      <div class="meta">
+        <span>Webページ作成日時：2026-06-12 15:40 JST</span>
+        <span>Webページ最終更新日時：2026-06-12 15:40 JST</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="article-wrap note-content">
+    <div class="toc">
+      <b>目次</b>
+      <a href="#position">0. このページの位置づけ</a>
+      <a href="#question">1. なぜ逆行列が出てくるのか</a>
+      <a href="#definition">2. 逆行列とは何か</a>
+      <a href="#identity">3. 単位行列とは何か</a>
+      <a href="#basis">4. 基底変換と逆行列</a>
+      <a href="#invertible">5. 戻せる変換とは何か</a>
+      <a href="#det-zero">6. 行列式が0だと戻せない</a>
+      <a href="#preimage">7. 逆行列と逆像は違う</a>
+      <a href="#next">8. 次に進むこと</a>
+    </div>
+
+    <h2 id="position">0. このページの位置づけ</h2>
+    <p>このページでは、基底変換のあとに出てきた逆行列を扱う。前のページでは、同じベクトルを別のものさしで測るために、基底を列に並べた行列 \(B\) を使った。</p>
+    <p>そこで出てきた関係は、</p>
+    <div class="math-block">$$\mathbf v_{標準}=B\mathbf v_B$$</div>
+    <p>である。これは、B座標で書かれた成分を、標準座標へ翻訳する式だった。</p>
+    <p>しかし、逆向きに知りたいことがある。標準座標で与えられたベクトルを、B座標ではどう書くのか。このとき必要になるのが逆行列である。</p>
+
+    <h2 id="question">1. なぜ逆行列が出てくるのか</h2>
+    <p>基底を列に並べた行列 \(B\) は、B座標を標準座標へ翻訳する装置である。</p>
+    <div class="math-block">$$\mathbf v_{標準}=B\mathbf v_B$$</div>
+    <p>たとえば、B座標で</p>
+    <div class="math-block">$$\mathbf v_B=\begin{pmatrix}2\\1\end{pmatrix}$$</div>
+    <p>と書かれたベクトルが、標準座標では</p>
+    <div class="math-block">$$\mathbf v_{標準}=\begin{pmatrix}3\\1\end{pmatrix}$$</div>
+    <p>になる、というようなことが起きる。</p>
+    <p>では、反対に、標準座標で</p>
+    <div class="math-block">$$\mathbf v_{標準}=\begin{pmatrix}3\\1\end{pmatrix}$$</div>
+    <p>と与えられたとき、B座標ではどう書けばよいのか。</p>
+    <p>この問いは、次の形になる。</p>
+    <div class="math-block">$$B\mathbf v_B=\mathbf v_{標準}$$</div>
+    <p>つまり、未知なのは \(\mathbf v_B\) である。これを解くために、\(B\) の逆向きの変換が必要になる。</p>
+    <div class="math-block">$$\mathbf v_B=B^{-1}\mathbf v_{標準}$$</div>
+    <p>ここで \(B^{-1}\) が逆行列である。</p>
+
+    <h2 id="definition">2. 逆行列とは何か</h2>
+    <p>ある正方行列 \(A\) に対して、次を満たす行列 \(A^{-1}\) が存在するとき、\(A^{-1}\) を \(A\) の逆行列という。</p>
+    <div class="math-block">$$A^{-1}A=I$$</div>
+    <div class="math-block">$$AA^{-1}=I$$</div>
+    <p>意味は単純である。\(A\) をかけたあとに \(A^{-1}\) をかけると元に戻る。逆に、\(A^{-1}\) をかけたあとに \(A\) をかけても元に戻る。</p>
+    <blockquote>逆行列とは、ある線形変換を打ち消して、元の状態へ戻す線形変換である。</blockquote>
+    <p>ただし、すべての行列に逆行列があるわけではない。逆行列を持つ行列は、正則行列、または可逆行列と呼ばれる。</p>
+    <div class="math-block">$$A\text{ が正則 }\Longleftrightarrow A^{-1}\text{ が存在する}$$</div>
+
+    <h2 id="identity">3. 単位行列とは何か</h2>
+    <p>上の式に出てきた \(I\) は単位行列である。二次元なら、</p>
+    <div class="math-block">$$I=\begin{pmatrix}1&0\\0&1\end{pmatrix}$$</div>
+    <p>である。</p>
+    <p>単位行列は、何もしない変換である。</p>
+    <div class="math-block">$$I\mathbf v=\mathbf v$$</div>
+    <p>つまり、単位行列は、数でいう \(1\) に近い役割を持つ。数なら、</p>
+    <div class="math-block">$$a^{-1}a=1$$</div>
+    <p>で元に戻る。行列では、</p>
+    <div class="math-block">$$A^{-1}A=I$$</div>
+    <p>で元に戻る。</p>
+    <p>ただし、行列では順番が重要になる。一般に行列の積は交換できないため、逆行列では左右両方の関係を確認する。</p>
+    <div class="math-block">$$A^{-1}A=I,\qquad AA^{-1}=I$$</div>
+
+    <h2 id="basis">4. 基底変換と逆行列</h2>
+    <p>基底変換では、逆行列は単なる計算テクニックではない。ものさしを変えたときに、同じ対象を別の座標で読み直すための装置である。</p>
+    <p>基底 \(B\) を列に並べた行列は、B座標を標準座標へ送る。</p>
+    <div class="math-block">$$\mathbf v_{標準}=B\mathbf v_B$$</div>
+    <p>逆に、標準座標をB座標へ戻すには、</p>
+    <div class="math-block">$$\mathbf v_B=B^{-1}\mathbf v_{標準}$$</div>
+    <p>とする。</p>
+    <p>ここで大事なのは、対象そのものが変わっているわけではないこと。変わっているのは表示である。</p>
+    <blockquote>逆行列は、変換された対象を魔法のように過去へ戻す装置ではない。同じ対象を、別の座標系で読み直すための逆向きの翻訳である。</blockquote>
+
+    <h2 id="invertible">5. 戻せる変換とは何か</h2>
+    <p>戻せる変換とは、異なる入力が異なる出力へ行く変換である。</p>
+    <p>もし、二つの異なるベクトル \(\mathbf u\) と \(\mathbf v\) が、同じ出力へ写ってしまうなら、出力だけを見ても、もとの入力が \(\mathbf u\) だったのか \(\mathbf v\) だったのか分からない。</p>
+    <div class="math-block">$$A\mathbf u=A\mathbf v,\qquad \mathbf u\ne\mathbf v$$</div>
+    <p>このとき、変換は一意には戻せない。</p>
+    <p>反対に、異なる入力が必ず異なる出力へ行くなら、出力から入力を一意に復元できる。そのとき逆行列が存在する。</p>
+    <figure class="figure-block">
+      <img src="assets/figures/invertible-vs-collapsed.svg" alt="戻せる変換と戻せない変換の比較。正則な変換では潰れず、行列式0の変換では方向が潰れる。" loading="lazy" />
+      <figcaption>戻せる変換と戻せない変換。正則な変換では空間の広がりが潰れず、行列式0の変換では別々の点が同じ像へ重なる。</figcaption>
+    </figure>
+
+    <h2 id="det-zero">6. 行列式が0だと戻せない</h2>
+    <p>二次元の線形変換では、行列式は面積の倍率を表す。</p>
+    <p>行列式が0でないなら、面積は0には潰れない。空間は伸びたり、縮んだり、回転したり、傾いたりしても、二次元の広がりを保っている。</p>
+    <div class="math-block">$$\det A\ne0$$</div>
+    <p>この場合、逆行列が存在する。</p>
+    <div class="math-block">$$A^{-1}\text{ が存在する}$$</div>
+    <p>一方で、行列式が0なら、面積が0に潰れる。平面が直線へ潰れたり、点へ潰れたりする。このとき、複数の入力が同じ出力へ重なる。</p>
+    <div class="math-block">$$\det A=0$$</div>
+    <p>この場合、逆行列は存在しない。</p>
+    <div class="math-block">$$A^{-1}\text{ は存在しない}$$</div>
+    <blockquote>行列式が0であるとは、空間のどこかの方向が潰れているということである。潰れた方向の違いは、出力側からは見えなくなる。</blockquote>
+
+    <h2 id="preimage">7. 逆行列と逆像は違う</h2>
+    <p>ここで重要な区別がある。逆行列と逆像は違う。</p>
+    <p>逆行列は、行列 \(A\) に対して存在するかどうかが問われる、逆向きの線形変換である。</p>
+    <div class="math-block">$$A^{-1}:W\to V$$</div>
+    <p>ただしこれは、\(A\) が正則で、ちゃんと戻せるときにだけ存在する。</p>
+    <p>一方、逆像は、逆行列が存在しない場合でも考えられる。</p>
+    <p>写像 \(F:X\to Y\) と、出力側の集合 \(B\subset Y\) に対して、</p>
+    <div class="math-block">$$F^{-1}(B)=\{x\in X\mid F(x)\in B\}$$</div>
+    <p>と書く。この \(F^{-1}\) は、必ずしも逆関数や逆行列ではない。記号は似ているが、「Bに入る入力全体を集める」という意味である。</p>
+    <p>たとえば、射影</p>
+    <div class="math-block">$$P(x,y,z)=(x,y)$$</div>
+    <p>には逆行列はない。\(z\) 成分が失われるからである。しかし、ある点 \((x,y)\) の逆像は考えられる。</p>
+    <div class="math-block">$$P^{-1}(\{(x,y)\})=\{(x,y,z)\mid z\in\mathbb R\}$$</div>
+    <p>つまり、逆行列は存在しないが、逆像は存在する。逆像は一点ではなく、一本の直線になる。</p>
+    <blockquote>逆行列は「一意に戻す」ための装置である。逆像は「その出力に対応しうる入力全体」を集めたものである。</blockquote>
+
+    <h2 id="next">8. 次に進むこと</h2>
+    <p>逆行列を理解すると、次に自然に出てくる問いは、「戻せないとき、何が失われているのか」である。</p>
+    <p>戻せない変換では、ある方向が潰れている。その潰れた方向を表すのが核であり、変換後に残った出力側の広がりを表すのが像である。</p>
+    <p>次のページでは、核・像・階数・退化次数をまとめて扱う。</p>
+    <div class="page-nav">
+      <a href="linear-change-of-basis.html">前へ：基底変換</a>
+      <a href="linear-kernel-image-rank.html">次へ：核と像</a>
+      <a href="linear-algebra-01.html">章目次へ</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="inner">失われた数学的直観の回復 / Webページ最終更新日時：2026-06-12 15:40 JST</div>
+  </footer>
+</body>
+</html>
