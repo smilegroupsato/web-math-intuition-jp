@@ -1,0 +1,51 @@
+name: Fix page dates
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/fix-page-dates.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch page dates
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          replacements = {
+              'site/linear-inverse-matrix.html': {
+                  'Webページ作成日時：2026-06-12 15:40 JST': 'Webページ作成日時：2026-06-12 12:46 JST',
+                  'Webページ最終更新日時：2026-06-12 15:40 JST': 'Webページ最終更新日時：2026-06-12 12:47 JST',
+                  'Webページ最終更新日時：2026-06-12 15:40 JST</div>': 'Webページ最終更新日時：2026-06-12 12:47 JST</div>',
+              },
+              'site/linear-kernel-image-rank.html': {
+                  'Webページ作成日時：2026-06-12 15:40 JST': 'Webページ作成日時：2026-06-12 12:46 JST',
+                  'Webページ最終更新日時：2026-06-12 15:40 JST': 'Webページ最終更新日時：2026-06-12 12:47 JST',
+                  'Webページ最終更新日時：2026-06-12 15:40 JST</div>': 'Webページ最終更新日時：2026-06-12 12:47 JST</div>',
+              },
+              'site/linear-algebra-01.html': {
+                  'Webページ最終更新日時：2026-06-12 15:40 JST': 'Webページ最終更新日時：2026-06-12 12:47 JST',
+              },
+              'site/index.html': {
+                  'Webページ最終更新日時：2026-06-12 15:40 JST': 'Webページ最終更新日時：2026-06-12 12:47 JST',
+                  '最終更新日時：2026-06-12 15:40 JST': '最終更新日時：2026-06-12 12:47 JST',
+              },
+          }
+          for filename, mapping in replacements.items():
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+              for old, new in mapping.items():
+                  text = text.replace(old, new)
+              path.write_text(text, encoding='utf-8')
+          Path('.github/workflows/fix-page-dates.yml').unlink()
+          PY
+      - name: Commit date fix
+        run: |
+          git config user.name github-actions-bot
+          git config user.email actions@example.com
+          git add -A
+          git commit -m "Fix page creation and update dates" || exit 0
+          git push
