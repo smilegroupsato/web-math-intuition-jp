@@ -8,7 +8,10 @@
       name="description"
       content="写像・像・逆像・情報喪失・不変量から、写真・絵画・逆問題・pre/post攪乱を経て、意味以前・意味以後・意味攪乱としての情緒へ接続する論考。"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260608-site-maintenance" />
+    <link
+      rel="stylesheet"
+      href="assets/style.css?v=20260608-site-maintenance"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
@@ -32,7 +35,7 @@
         });
       });
     </script>
-</head>
+  </head>
   <body>
     <header class="topbar">
       <div class="topbar-inner">
@@ -206,10 +209,16 @@
       <div class="math-block">$$ P:\mathbb{R}^3\to\mathbb{R}^2 $$</div>
       <div class="math-block">$$ P(x,y,z)=(x,y) $$</div>
 
-<figure class="figure-block">
-  <img src="assets/figures/projection-xy.svg" alt="射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。" loading="lazy" />
-  <figcaption>射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。</figcaption>
-</figure>
+      <figure class="figure-block">
+        <img
+          src="assets/figures/projection-xy.svg"
+          alt="射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。"
+          loading="lazy"
+        />
+        <figcaption>
+          射影 P(x,y,z)=(x,y)。三次元点の z 成分を捨て、xy平面へ写す。
+        </figcaption>
+      </figure>
       <p>である。</p>
       <p>
         これは、三次元ベクトルのうち \(z\) 成分を捨て、\(x,y\)
@@ -238,10 +247,16 @@
       <p>数学的には、この同一化は核によって記述される。</p>
       <div class="math-block">$$ \ker P=\{(0,0,z)\mid z\in\mathbb{R}\} $$</div>
 
-<figure class="figure-block">
-  <img src="assets/figures/kernel-z-axis.svg" alt="射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。" loading="lazy" />
-  <figcaption>射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。</figcaption>
-</figure>
+      <figure class="figure-block">
+        <img
+          src="assets/figures/kernel-z-axis.svg"
+          alt="射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。"
+          loading="lazy"
+        />
+        <figcaption>
+          射影 P(x,y,z)=(x,y) の核。原点 (0,0) に潰れる入力全体は z 軸になる。
+        </figcaption>
+      </figure>
       <p>
         これは、\(P\) によってゼロへ潰される方向である。\(z\)
         軸方向の差は、投影後には見えない。
@@ -415,10 +430,16 @@
       </p>
       <div class="math-block">$$ F:X\to Y $$</div>
 
-<figure class="figure-block">
-  <img src="assets/figures/image-preimage-map.svg" alt="像と逆像の関係図" loading="lazy" />
-  <figcaption>写像 F:X→Y における像 F(A) と逆像 F^{-1}(B) の関係。</figcaption>
-</figure>
+      <figure class="figure-block">
+        <img
+          src="assets/figures/image-preimage-map.svg"
+          alt="像と逆像の関係図"
+          loading="lazy"
+        />
+        <figcaption>
+          写像 F:X→Y における像 F(A) と逆像 F^{-1}(B) の関係。
+        </figcaption>
+      </figure>
       <p>ここで \(F\) は、三次元世界を二次元像へ写す観測写像である。</p>
       <p>
         これは必ずしも線形写像ではない。しかし、写像である以上、次の問いは残る。
@@ -456,10 +477,17 @@
         つまり、画像上の一点は、三次元空間内の一点ではなく、視線方向の一本の半直線に対応する。
       </p>
 
-<figure class="figure-block">
-  <img src="assets/figures/perspective-ray-preimage.svg" alt="透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。" loading="lazy" />
-  <figcaption>透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。</figcaption>
-</figure>
+      <figure class="figure-block">
+        <img
+          src="assets/figures/perspective-ray-preimage.svg"
+          alt="透視投影では、画像平面上の一点 y に対して、三次元空間側では視線方向の半直線が候補逆像になる。"
+          loading="lazy"
+        />
+        <figcaption>
+          透視投影では、画像平面上の一点 y
+          に対して、三次元空間側では視線方向の半直線が候補逆像になる。
+        </figcaption>
+      </figure>
       <p>
         写真を見るとは、二次元平面上の点を見ることである。しかし、その点の逆像は、三次元空間内の一点ではない。それは奥行き方向に伸びる、可能な世界の集合である。
       </p>
@@ -864,7 +892,8 @@
       <div class="inner">
         <div>失われた数学的直観の回復</div>
         <div>
-          Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：2026-06-08 18:20 JST
+          Webページ作成日時：2026-06-06 00:23 JST / 最終更新日時：2026-06-08
+          18:20 JST
         </div>
       </div>
     </footer>
